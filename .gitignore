@@ -7,3 +7,5 @@ dhparam.pem
 
 sdkconfig
 sdkconfig.old
+
+firmware.bin
