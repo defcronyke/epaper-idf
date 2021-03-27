@@ -1,0 +1,9 @@
+build/
+server_certs/*
+
+ca_cert.pem
+ca_key.pem
+dhparam.pem
+
+sdkconfig
+sdkconfig.old

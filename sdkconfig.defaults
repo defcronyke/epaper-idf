@@ -1,0 +1,7 @@
+# Default sdkconfig parameters to use the OTA
+# partition table layout, with a 4MB flash size
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+CONFIG_PARTITION_TABLE_TWO_OTA=y
+CONFIG_PROJECT_FIRMWARE_UPGRADE_URL="https://esprog:8089/firmware.bin"
+CONFIG_LWIP_LOCAL_HOSTNAME="epaper"
+CONFIG_EXAMPLE_CONNECT_IPV6=n
