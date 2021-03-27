@@ -1,16 +1,50 @@
-#!/bin/sh
+#!/bin/bash
 
-pwd="$PWD"
+process_epaper_idf_gen_dhparam_args() {
+    epaper_idf_script_args=()
 
-BUILD_DIR=${BUILD_DIR:-"build/"}
+    for arg in "$@"; do
+        epaper_idf_script_args+=("${arg}")
+    done
 
-mkdir -p ${BUILD_DIR}
+    set -- "${epaper_idf_script_args[@]}"
 
-cd ${BUILD_DIR}
+    export EPAPER_IDF_SCRIPT_ARGS=$@
+}
 
-openssl dhparam -out dhparam.pem 4096
-chmod 600 dhparam.pem
+epaper_idf_gen_dhparam() {
+    pwd="$PWD"
+    BUILD_DIR=${BUILD_DIR:-"build/"}
 
-cp dhparam.pem ../
+    BUILD_DIR_VAR_NAME="BUILD_DIR"
+    BUILD_VAR_OUT=""
+    
+    if [ ! -z ${BUILD_DIR+x} ]; then
+        BUILD_VAR_OUT="${BUILD_DIR_VAR_NAME}=\"${BUILD_DIR}\""
+    fi
 
-cd "$pwd"
+    if [ -f "dhparam.pem" ]; then
+        echo "error: You already have a \"./dhparam.pem\" file. \
+Delete it first and then run this script again if you want to \
+generate a new file, for example:"
+        echo ""
+        echo "rm dhparam.pem; ${BUILD_VAR_OUT} ${BASH_SOURCE[0]}"
+        echo ""
+        return 1
+    fi
+
+    mkdir -p ${BUILD_DIR}
+
+    cd ${BUILD_DIR}
+
+    openssl dhparam -out dhparam.pem 4096
+    chmod 600 dhparam.pem
+
+    cp dhparam.pem ../
+
+    cd "$pwd"
+}
+
+process_epaper_idf_gen_dhparam_args "$@"
+
+epaper_idf_gen_dhparam "$@"

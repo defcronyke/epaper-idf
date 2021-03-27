@@ -8,10 +8,18 @@ Copyright (c) [Jeremy Carter](https://eternalvoid.net) `<`[jeremy@jeremycarter.c
   
 ### Prerequisites  
   
-* Install the current stable version of Espressif's ESP32 IDF:  
-  [https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html)  
-  
-### To set up the project for OTA, do this once  
+1. Install the current stable version of Espressif's ESP32 IDF:  
+   [https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html)  
+2. If on ESP32 IDF v4.2, their release is bugged, so you have to do the following additional steps to fix it:
+
+   ```shell
+   cd ~/esp/esp-idf && \
+   git checkout remotes/origin/release/v4.2 && \
+   git submodule update --init --recursive && \
+   ./install.sh
+   ```
+
+### To set up the project for OTA firware updating ability, do this once  
   
 ```shell
 # generate the DH param
@@ -52,15 +60,23 @@ idf.py flash
 idf.py monitor
 ```
 
-### OTA firmware updating
+### OTA firmware updating instructions
 
 1. Configure your LAN's DNS to point the hostname "esprog" at the IP address of your firmware dev computer.
-2. Update the version number in the "version.txt file".
-3. Build your new firmware, as per the above "To build the firmware" instructions.
-4. Run the following script:
+2. Make sure you have these files on your dev computer (the same exact ones which were uploaded originally to the esp32 device by non-OTA method): ca_cert.pem, ca_key.pem, dhparam.pem
+3. Also copy this file into another spot, like so:
+
+   ```shell
+   mkdir -p server_certs && \
+   cp ca_cert.pem server_certs/
+   ```
+
+4. Update the version number in the "version.txt file".
+5. Build your new firmware, as per the above "To build the firmware" instructions.
+6. Run the following script:
 
    ```shell
    ./serve.sh
    ```
 
-5. While the above script is running, reboot your esp32 device to load the new firmware.
+7. While the above script is running, reboot your esp32 device to load the new firmware.

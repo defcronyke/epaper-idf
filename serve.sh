@@ -1,24 +1,42 @@
 #!/bin/bash
 
-HOST=${1:-"esprog"}
-PORT=${2:-"8089"}
-CERT_DIR=${CERT_DIR:-"build/"}
+process_epaper_idf_serve_args() {
+    epaper_idf_script_args=()
 
-go_back() {
-    cd "$pwd"
+    for arg in "$@"; do
+        epaper_idf_script_args+=("${arg}")
+    done
+
+    set -- "${epaper_idf_script_args[@]}"
+
+    export EPAPER_IDF_SCRIPT_ARGS=$@
 }
 
-pwd="$PWD"
+epaper_idf_serve() {
+    HOST=${1:-"esprog"}
+    PORT=${2:-"8089"}
+    CERT_DIR=${CERT_DIR:-"build/"}
 
-cd "$CERT_DIR"
+    go_back() {
+        cd "$pwd"
+    }
 
-ln -sf "$(basename "$pwd").bin" "firmware.bin"
-ln -sf ../version.txt
+    pwd="$PWD"
 
-cp ../ca_cert.pem ../ca_key.pem ../dhparam.pem .
+    cd "$CERT_DIR"
 
-trap 'go_back' INT
+    ln -sf "$(basename "$pwd").bin" "firmware.bin"
+    ln -sf ../version.txt version.txt
 
-echo "The device will request firmware from: https://${HOST}:${PORT}/firmware.bin"
+    cp ../ca_cert.pem ../ca_key.pem ../dhparam.pem .
 
-openssl s_server -cert ca_cert.pem -key ca_key.pem -dhparam dhparam.pem -accept ${PORT} -WWW
+    trap 'go_back' INT
+
+    echo "The device will request firmware from: https://${HOST}:${PORT}/firmware.bin"
+
+    openssl s_server -cert ca_cert.pem -key ca_key.pem -dhparam dhparam.pem -accept ${PORT} -WWW
+}
+
+process_epaper_idf_serve_args "$@"
+
+epaper_idf_serve "$@"

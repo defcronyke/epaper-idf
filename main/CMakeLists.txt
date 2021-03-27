@@ -12,5 +12,5 @@ idf_component_register(
     
     # Embed the server root certificate into the final binary
     EMBED_TXTFILES 
-        ${project_dir}/server_certs/ca_cert.pem
+        ${project_dir}/certs/ca_cert.pem
 )

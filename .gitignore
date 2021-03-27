@@ -1,5 +1,5 @@
 build/
-server_certs/*
+certs/*
 
 ca_cert.pem
 ca_key.pem
