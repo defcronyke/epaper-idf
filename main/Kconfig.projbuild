@@ -1,37 +1,42 @@
-menu "Project OTA Configuration"
+menu "Project config"
 
-    config PROJECT_FIRMWARE_UPGRADE_URL
-        string "Firmware Upgrade URL"
-        default "https://esprog:8089/firmware.bin"
+    config PROJECT_IMAGES_INDEX_JSON_URL
+        string "URL to a JSON object of images (8-bit max .bmp)"
+        default "http://defcronyke.gitlab.io/epaper-idf/images/index.json"
         help
-            URL of server which hosts the firmware image.
+            A URL to an HTTP GET route hosting a JSON file containing an object specifying relative paths or 
+            URLs to Bitmap images to display on the screen (1, 4, or 8 bits per pixel).
 
-    config PROJECT_FIRMWARE_UPGRADE_URL_FROM_STDIN
-        bool
-        default y if PROJECT_FIRMWARE_UPGRADE_URL = "FROM_STDIN"
+            See these example files:
+            
+                ./public/images/index.json  (used by default)
+                ./public/images/index-example-paths.json
+                ./public/images/index-example-urls.json
 
-    config PROJECT_SKIP_COMMON_NAME_CHECK
-        bool "Skip server certificate CN fieldcheck"
-        default n
+    config PROJECT_DEEP_SLEEP_SECONDS
+        int "Deep sleep seconds between screen refreshes [min - -15 || 15 - max]"
+        default 200
         help
-            This allows you to skip the validation of OTA server certificate CN field.
+            Seconds that the ESP32 device will go into deep sleep mode between screen refreshes.
 
-    config PROJECT_SKIP_VERSION_CHECK
-        bool "Skip firmware version check"
-        default n
-        help
-            This allows you to skip the firmware version check.
+            Range: min_ilong - -15 || 15 - max_ilong
+            
+            Use a negative number if you'd like it to just wait instead of sleeping, 
+            for example: -200
 
-    config PROJECT_OTA_RECV_TIMEOUT
-        int "OTA Receive Timeout"
-        default 5000
+    config PROJECT_DISPLAY_ROTATION
+        int "Display rotation: 0 = 0°, 1 = 90° cw, 2 = 180° 3 = 270°"
+        range 0 3
+        default 0
         help
-            Maximum time for reception
+            The screen will display things with this rotation applied (in ° degrees):
+
+                0 = 0°, 1 = 90° cw, 2 = 180° 3 = 270°
 
 endmenu
 
 
-menu "Project Connection Configuration"
+menu "Project connection config"
 
     config EXAMPLE_CONNECT_WIFI
         bool "connect using WiFi interface"
@@ -246,5 +251,38 @@ menu "Project Connection Configuration"
         endchoice
 
     endif
+
+endmenu
+
+
+menu "Project OTA firmware config"
+
+    config PROJECT_FIRMWARE_UPGRADE_URL
+        string "Firmware Upgrade URL"
+        default "https://esprog:8089/firmware.bin"
+        help
+            URL of the server which hosts the new firmware image.
+
+    config PROJECT_FIRMWARE_UPGRADE_URL_FROM_STDIN
+        bool
+        default y if PROJECT_FIRMWARE_UPGRADE_URL = "FROM_STDIN"
+
+    config PROJECT_SKIP_COMMON_NAME_CHECK
+        bool "Skip server certificate CN fieldcheck"
+        default n
+        help
+            This allows you to skip the validation of OTA server certificate CN field.
+
+    config PROJECT_SKIP_VERSION_CHECK
+        bool "Skip firmware version check"
+        default n
+        help
+            This allows you to skip the firmware version check.
+
+    config PROJECT_OTA_RECV_TIMEOUT
+        int "OTA Receive Timeout"
+        default 5000
+        help
+            Maximum time for reception.
 
 endmenu
