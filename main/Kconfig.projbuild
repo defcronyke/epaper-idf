@@ -12,6 +12,7 @@ menu "Project config"
                 ./public/images/index.json  (used by default)
                 ./public/images/index-path.json
                 ./public/images/index-url.json
+                ./public/images/index-url-inline.json
 
     config PROJECT_DEEP_SLEEP_SECONDS
         int "Deep sleep seconds between screen refreshes [min - -15 || 15 - max]"
