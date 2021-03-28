@@ -1,0 +1,6 @@
+[submodule "components/Adafruit-GFX-Component"]
+	path = components/Adafruit-GFX-Component
+	url = https://github.com/defcronyke/Adafruit-GFX-Component.git
+[submodule "components/epaper-idf-component"]
+	path = components/epaper-idf-component
+	url = https://github.com/defcronyke/epaper-idf-component.git

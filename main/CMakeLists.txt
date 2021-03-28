@@ -14,3 +14,8 @@ idf_component_register(
     EMBED_TXTFILES 
         ${project_dir}/certs/ca_cert.pem
 )
+
+set(
+    COMPONENTS_DIRS,
+        ${project_dir}/components
+)
