@@ -10,8 +10,8 @@ menu "Project config"
             See these example files:
             
                 ./public/images/index.json  (used by default)
-                ./public/images/index-example-paths.json
-                ./public/images/index-example-urls.json
+                ./public/images/index-path.json
+                ./public/images/index-url.json
 
     config PROJECT_DEEP_SLEEP_SECONDS
         int "Deep sleep seconds between screen refreshes [min - -15 || 15 - max]"
