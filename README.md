@@ -18,7 +18,24 @@ Copyright (c) 2021 [Jeremy Carter](https://eternalvoid.net) `<`[jeremy@jeremycar
    git submodule update --init --recursive && \
    ./install.sh
    ```
+  
+### To clone this project with git  
+  
+```shell
+# Clone the current stable version:
+git clone -b v0.1 --recursive https://gitlab.com/defcronyke/epaper-idf.git
 
+# Or clone the current development version instead:
+git clone --recursive https://gitlab.com/defcronyke/epaper-idf.git
+```  
+  
+### To update this project if you already have a copy cloned with git  
+  
+```shell
+git pull; \
+git submodule update --init --recursive
+```  
+  
 ### To set up the project for OTA firware updating ability, do this once  
   
 ```shell
