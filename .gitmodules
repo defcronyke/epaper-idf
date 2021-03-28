@@ -6,7 +6,3 @@
 	path = components/epaper-idf-component
 	url = https://github.com/defcronyke/epaper-idf-component.git
 	branch = v0.1
-[submodule "components/arduino-esp32"]
-	path = components/arduino-esp32
-	url = https://github.com/defcronyke/arduino-esp32.git
-	branch = 1.0
