@@ -1,6 +1,6 @@
 /*  epaper-idf - main.cpp
 
-    Copyright (c) Jeremy Carter <jeremy@jeremycarter.ca>
+    Copyright (c) 2021 Jeremy Carter <jeremy@jeremycarter.ca>
 
     This code is released under the license terms contained in the
     file named LICENSE, which is found in the top-level folder in
