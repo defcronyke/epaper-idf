@@ -6,7 +6,3 @@
 	path = components/epaper-idf-component
 	url = https://github.com/defcronyke/epaper-idf-component.git
 	branch = v0.1
-[submodule "components/Adafruit_BusIO"]
-	path = components/Adafruit_BusIO
-	url = https://github.com/defcronyke/Adafruit_BusIO.git
-	branch = 1.7
