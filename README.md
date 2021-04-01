@@ -4,7 +4,9 @@
   
 Copyright (c) 2021 [Jeremy Carter](https://eternalvoid.net) `<`[jeremy@jeremycarter.ca](mailto:Jeremy%20Carter%20<jeremy@jeremycarter.ca>?subject=epaper-idf)`>`  
   
-### This is a work in progress. Check back later for updates  
+## This is a work in progress  
+
+*Check back later for updates...*  
   
 ### Details  
   
