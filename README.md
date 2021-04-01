@@ -41,7 +41,7 @@ Copyright (c) 2021 [Jeremy Carter](https://eternalvoid.net) `<`[jeremy@jeremycar
 ### To clone this project with git  
   
 ```shell
-# Clone the current stable version:
+# Clone the current stable version (well it's not really stable yet though):
 git clone -b v0.1 --recursive https://gitlab.com/defcronyke/epaper-idf.git
 
 # Or clone the current development version instead:
@@ -55,7 +55,7 @@ git pull; \
 git submodule update --init --recursive
 ```  
   
-### To set up the project for OTA firware updating ability, do this once  
+### To set up the project for OTA firmware updating ability, do this once  
   
 ```shell
 # generate the DH param
@@ -68,10 +68,10 @@ git submodule update --init --recursive
 ### To configure the firmware  
   
 ```shell
-# source the esp-idf
+# source the esp-idf each time you open a new terminal instance
 . idf.env
 
-# open the firmware configuration menu
+# open the firmware configuration (Kconfig) menu
 idf.py menuconfig
 ```  
 
@@ -108,12 +108,13 @@ idf.py monitor
    cp ca_cert.pem server_certs/
    ```
 
-4. Update the version number in the "version.txt file".
+4. Update the version number in the "version.txt" file. This is what will trigger the ESP32 device to download your new firmware the next time you reboot it.
 5. Build your new firmware, as per the above "To build the firmware" instructions.
-6. Run the following script:
+6. Run the following script (make sure your "ca_cert.pem", "ca_key.pem", and "dhparam.pem" files are in the same folder as the script first):
 
    ```shell
    ./serve.sh
    ```
 
 7. While the above script is running, reboot your esp32 device to load the new firmware.
+8. Whenever you want to load new firmware, just change the version.txt's version number (higher or lower, it doesn't matter), then build the firmware, run the server script, and reboot the ESP32 device to load the new firmware onto it.
