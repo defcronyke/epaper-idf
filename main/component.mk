@@ -1,1 +1,1 @@
-COMPONENT_EMBED_TXTFILES :=  ${PROJECT_PATH}/certs/ca_cert.pem
+# COMPONENT_EMBED_TXTFILES :=  ${PROJECT_PATH}/certs/ca_cert.pem
