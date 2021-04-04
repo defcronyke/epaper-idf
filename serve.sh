@@ -26,6 +26,12 @@ epaper_idf_serve() {
     cp ca_cert.pem ca_key.pem dhparam.pem "$CERT_DIR"
 
     idf.py build
+    
+    build_res=$?
+
+    if [ $build_res -ne 0 ]; then
+      return $build_res
+    fi
 
     cd "$CERT_DIR"
 
