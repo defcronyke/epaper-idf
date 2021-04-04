@@ -23,12 +23,13 @@ epaper_idf_serve() {
 
     pwd="$PWD"
 
+    cp ca_cert.pem ca_key.pem dhparam.pem "$CERT_DIR"
+
+    idf.py build
+
     cd "$CERT_DIR"
 
     ln -sf "$(basename "$pwd").bin" "firmware.bin"
-    ln -sf ../version.txt version.txt
-
-    cp ../ca_cert.pem ../ca_key.pem ../dhparam.pem .
 
     trap 'go_back' INT
 
