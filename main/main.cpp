@@ -8,9 +8,18 @@
 		otherwise you aren't allowed to copy, distribute, or use any 
 		part of this project in any way.
 */
-#include "task.h"
+#include "epaper-idf-task.h"
 
 extern "C" void app_main(void)
 {
+  /** NOTE: This starts your main firmware task. You can select 
+    which task you want to run in the Kconfig menu settings by
+    running this command:
+    
+      idf.py menuconfig
+
+    You'll choose between the provided examples, or your own 
+    custom tasks which you added to the menu as per the provided 
+    instructions. */
   main_fn();
 }

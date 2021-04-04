@@ -1,1 +1,0 @@
-# COMPONENT_EMBED_TXTFILES :=  ${PROJECT_PATH}/certs/ca_cert.pem
