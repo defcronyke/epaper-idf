@@ -8,9 +8,9 @@
 		otherwise you aren't allowed to copy, distribute, or use any 
 		part of this project in any way.
 */
-#include "example/http-slideshow.h"
+#include "task.h"
 
 extern "C" void app_main(void)
 {
-  http_slideshow();
+  main_fn();
 }

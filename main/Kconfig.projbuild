@@ -1,4 +1,19 @@
 menu "Project config"
+    choice PROJECT_MAIN_TASK
+        prompt "Select project main task"
+        default PROJECT_MAIN_TASK_EXAMPLE_HTTP_SLIDESHOW
+        help
+            Choose the main task to run for this project.
+            You can pick one of the examples, or add your
+            own task to this list.
+        
+        config PROJECT_MAIN_TASK_EXAMPLE_HTTP_SLIDESHOW
+            bool "HTTP Slideshow"
+
+        config PROJECT_MAIN_TASK_NONE
+            bool "none"
+
+    endchoice
 
     config PROJECT_IMAGES_INDEX_JSON_URL
         string "URL to a JSON object of images (8-bit max .bmp)"
