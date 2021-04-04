@@ -12,5 +12,5 @@
 
 extern "C" void app_main(void)
 {
-  main_http_slideshow();
+  http_slideshow();
 }
