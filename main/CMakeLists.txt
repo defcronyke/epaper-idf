@@ -2,7 +2,7 @@ idf_component_register(
   SRCS
     "main.cpp"
 
-    ${project_dir}/components/epaper-idf-component/example/http-slideshow/main.cpp
+    ${project_dir}/components/epaper-idf-component/example/http-slideshow.cpp
 
     $ENV{IDF_PATH}/examples/common_components/protocol_examples_common/connect.c
     $ENV{IDF_PATH}/examples/common_components/protocol_examples_common/addr_from_stdin.c
@@ -12,7 +12,7 @@ idf_component_register(
     "epaper-idf-component"
 
   INCLUDE_DIRS
-    ${project_dir}/components/epaper-idf-component/example/include
+    ${project_dir}/components/epaper-idf-component/include
 
     $ENV{IDF_PATH}/examples/common_components/protocol_examples_common/include
   

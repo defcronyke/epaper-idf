@@ -8,7 +8,7 @@
 		otherwise you aren't allowed to copy, distribute, or use any 
 		part of this project in any way.
 */
-#include "http-slideshow.h"
+#include "example/http-slideshow.h"
 
 extern "C" void app_main(void)
 {
