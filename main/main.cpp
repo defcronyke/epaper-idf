@@ -12,7 +12,7 @@
 
 extern "C" void app_main(void)
 {
-  /** NOTE: This starts your main firmware task. You can select 
+	/** NOTE: This starts your main firmware task. You can select 
     which task you want to run in the Kconfig menu settings by
     running this command:
     
@@ -21,5 +21,5 @@ extern "C" void app_main(void)
     You'll choose between the provided examples, or your own 
     custom tasks which you added to the menu as per the provided 
     instructions. */
-  main_fn();
+	main_fn();
 }
