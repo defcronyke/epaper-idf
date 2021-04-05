@@ -2,6 +2,7 @@ idf_component_register(
   SRCS
     "main.cpp"
 
+    # ${project_dir}/components/epaper-idf-component/epaper-idf-http.c
     ${project_dir}/components/epaper-idf-component/task/http-slideshow.cpp
   
   REQUIRES
