@@ -1,3 +1,3 @@
 #!/bin/bash
 
-git pull; git submodule update --init --recursive; git pull
+git pull; git submodule update --init --recursive
