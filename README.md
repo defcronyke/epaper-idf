@@ -61,10 +61,10 @@ This is how to install an already compiled version of the firmware if you don't 
    > "$FILENAME" && \
    esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" \
    write_flash --flash_size 4MB \
-   0x8000 partition_table/partition-table.bin \
-   0xd000 ota_data_initial.bin \
-   0x1000 bootloader/bootloader.bin \
-   0x10000 epaper-idf.bin; \
+   0x8000 "$PARTITION_FILENAME" \
+   0xd000 "$OTA_DATA_FILENAME" \
+   0x1000 "$BOOTLOADER_FILENAME" \
+   0x10000 "$FILENAME"; \
    rm "$PARTITION_FILENAME"; \
    rm "$OTA_DATA_FILENAME"; \
    rm "$BOOTLOADER_FILENAME"; \
@@ -95,10 +95,10 @@ This is how to install an already compiled version of the firmware if you don't 
    > "$FILENAME" && \
    esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" \
    write_flash --flash_size 4MB \
-   0x8000 partition_table/partition-table.bin \
-   0xd000 ota_data_initial.bin \
-   0x1000 bootloader/bootloader.bin \
-   0x10000 epaper-idf.bin; \
+   0x8000 "$PARTITION_FILENAME" \
+   0xd000 "$OTA_DATA_FILENAME" \
+   0x1000 "$BOOTLOADER_FILENAME" \
+   0x10000 "$FILENAME"; \
    rm "$PARTITION_FILENAME"; \
    rm "$OTA_DATA_FILENAME"; \
    rm "$BOOTLOADER_FILENAME"; \
