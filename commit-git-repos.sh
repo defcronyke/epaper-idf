@@ -1,7 +1,7 @@
 #!/bin/bash
 
 epaper_idf_commit_git_repo_adafruit() {
-  ver="$1"
+  adafruit_ver="$1"
 
   cd components/Adafruit-GFX-Component/
   git add .
@@ -10,7 +10,7 @@ epaper_idf_commit_git_repo_adafruit() {
     return $?
 
   git push
-  git checkout $ver
+  git checkout $adafruit_ver
   git merge master
   git push
   git checkout master
