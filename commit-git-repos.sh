@@ -57,11 +57,11 @@ epaper_idf_commit_git_repo_epaper_idf() {
 epaper_idf_commit_git_repos_handle_return() {
   ret=$1
 
-  printf '%b\n' "error: git commit failed with exit code:\n$ret"
-
   if [ $ret -ne 0 ]; then
-    exit $ret
+    printf '%b\n' "info: git commit skipped with exit code:\n$ret"
   fi
+
+  return 0
 }
 
 epaper_idf_commit_git_repos() {
@@ -70,13 +70,13 @@ epaper_idf_commit_git_repos() {
   adafruit_ver="1.10"
 
   epaper_idf_commit_git_repo_adafruit "$adafruit_ver"
-  epaper_idf_commit_git_repos_handle_return
+  epaper_idf_commit_git_repos_handle_return $?
 
   epaper_idf_commit_git_repo_epaper_idf_component "$ver"
-  epaper_idf_commit_git_repos_handle_return
+  epaper_idf_commit_git_repos_handle_return $?
 
   epaper_idf_commit_git_repo_epaper_idf "$ver"
-  epaper_idf_commit_git_repos_handle_return
+  epaper_idf_commit_git_repos_handle_return $?
 }
 
 epaper_idf_commit_git_repos $@
