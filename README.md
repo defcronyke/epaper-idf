@@ -47,7 +47,7 @@ This is how to install an already compiled version of the firmware if you don't 
    BOOTLOADER_FILENAME="epaper-idf-bootloader-$FIRMWARE_VERSION.bin"; \
    curl -sL https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VERSION/raw/bootloader.bin?job=build-job > "$BOOTLOADER_FILENAME" && \
    curl -sL https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VERSION/raw/epaper-idf.bin?job=build-job > "$FILENAME" && \
-   esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" write_flash 0x00000 "$FILENAME" && \
+   esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" write_flash 0x00000 "$BOOTLOADER_FILENAME" && \
    esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" write_flash 0x10000 "$FILENAME"; \
    rm "$BOOTLOADER_FILENAME"; \
    rm "$FILENAME"
