@@ -44,15 +44,29 @@ This is how to install an already compiled version of the firmware if you don't 
    SERIAL_PORT="/dev/ttyUSB0"; \
    BAUD_RATE="115200"; \
    FILENAME="epaper-idf-$FIRMWARE_VER.bin"; \
+   PARTITION_FILENAME="epaper-idf-partition-table-$FIRMWARE_VER.bin"; \
+   OTA_DATA_FILENAME="epaper-idf-ota-data-initial-$FIRMWARE_VER.bin"; \
    BOOTLOADER_FILENAME="epaper-idf-bootloader-$FIRMWARE_VER.bin"; \
+   curl -sL \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/partition-table.bin?job=build-job \
+   > "$PARTITION_FILENAME" && \
+   curl -sL \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/ota_data_initial.bin?job=build-job \
+   > "$OTA_DATA_FILENAME" && \
    curl -sL \
    https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/bootloader.bin?job=build-job \
    > "$BOOTLOADER_FILENAME" && \
    curl -sL \
    https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/epaper-idf.bin?job=build-job \
    > "$FILENAME" && \
-   esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" write_flash 0x00000 "$BOOTLOADER_FILENAME" && \
-   esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" write_flash 0x10000 "$FILENAME"; \
+   esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" \
+   write_flash --flash_size 4MB \
+   0x8000 partition_table/partition-table.bin \
+   0xd000 ota_data_initial.bin \
+   0x1000 bootloader/bootloader.bin \
+   0x10000 epaper-idf.bin; \
+   rm "$PARTITION_FILENAME"; \
+   rm "$OTA_DATA_FILENAME"; \
    rm "$BOOTLOADER_FILENAME"; \
    rm "$FILENAME"
    ```
@@ -64,15 +78,29 @@ This is how to install an already compiled version of the firmware if you don't 
    SERIAL_PORT="/dev/ttyUSB0"; \
    BAUD_RATE="115200"; \
    FILENAME="epaper-idf-$FIRMWARE_VER.bin"; \
+   PARTITION_FILENAME="epaper-idf-partition-table-$FIRMWARE_VER.bin"; \
+   OTA_DATA_FILENAME="epaper-idf-ota-data-initial-$FIRMWARE_VER.bin"; \
    BOOTLOADER_FILENAME="epaper-idf-bootloader-$FIRMWARE_VER.bin"; \
+   curl -sL \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/partition-table.bin?job=build-job \
+   > "$PARTITION_FILENAME" && \
+   curl -sL \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/ota_data_initial.bin?job=build-job \
+   > "$OTA_DATA_FILENAME" && \
    curl -sL \
    https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/bootloader.bin?job=build-job \
    > "$BOOTLOADER_FILENAME" && \
    curl -sL \
    https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/epaper-idf.bin?job=build-job \
    > "$FILENAME" && \
-   esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" write_flash 0x00000 "$BOOTLOADER_FILENAME" && \
-   esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" write_flash 0x10000 "$FILENAME"; \
+   esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" \
+   write_flash --flash_size 4MB \
+   0x8000 partition_table/partition-table.bin \
+   0xd000 ota_data_initial.bin \
+   0x1000 bootloader/bootloader.bin \
+   0x10000 epaper-idf.bin; \
+   rm "$PARTITION_FILENAME"; \
+   rm "$OTA_DATA_FILENAME"; \
    rm "$BOOTLOADER_FILENAME"; \
    rm "$FILENAME"
    ```
