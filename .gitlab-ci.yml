@@ -11,7 +11,7 @@ build-job:
     - idf.py build
     - cp build/epaper-idf.bin .
   artifacts:
-    name: firmware.zip
+    name: "firmware-$CI_COMMIT_REF_NAME"
     paths:
       - epaper-idf.bin
   only:

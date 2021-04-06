@@ -27,6 +27,20 @@ _Check back later for updates..._
 
 ---
 
+## Quickstart - Install the pre-built firmware
+
+This is how to install an already compiled version of the firmware if you don't intend to modify it. Otherwise, skip this step and follow the instructions in the other sections below:
+
+```shell
+# Install espressif's official esptool.py firmware flashing utility
+python -m pip install esptool
+
+# Download the latest release version of the epaper-idf firmware
+
+```
+
+---
+
 ## Prerequisites
 
 1. Install the current stable version of Espressif's ESP32 IDF:  
