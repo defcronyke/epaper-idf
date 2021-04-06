@@ -21,7 +21,7 @@ epaper_idf_commit_git_repo_adafruit() {
 epaper_idf_commit_git_repo_epaper_idf_component() {
   ver="$1"
 
-  cd components/epaper-idf-component/
+  cd ../epaper-idf-component/
   git add .
 
   git commit -m "$msg" || \
