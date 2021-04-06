@@ -58,7 +58,7 @@ epaper_idf_commit_git_repos_handle_return() {
   ret=$1
 
   if [ $ret -ne 0 ]; then
-    printf '%b\n' "info: git commit skipped with exit code:\n$ret"
+    printf '%b\n' "info: git commit skipped with exit code:\n$ret\n"
   fi
 
   return 0
