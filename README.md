@@ -31,13 +31,21 @@ _Check back later for updates..._
 
 This is how to install an already compiled version of the firmware if you don't intend to modify it. Otherwise, skip this step and follow the instructions in the other sections below:
 
-```shell
-# Install espressif's official esptool.py firmware flashing utility
-python -m pip install esptool
+1. Install espressif's official esptool.py firmware flashing utility:
 
-# Download the latest release version of the epaper-idf firmware
+   ```shell
+   python -m pip install esptool
+   ```
 
-```
+1. Flash the latest release version of the epaper-idf firmware:
+
+   ```shell
+   SERIAL_PORT="/dev/ttyUSB0"; \
+   FILENAME="epaper-idf-v0.1.bin"; \
+   curl -sL https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/v0.1/raw/epaper-idf.bin?job=build-job > "$FILENAME" && \
+   esptool.py -p "$SERIAL_PORT" -b 115200 write_flash 0x1000 "$FILENAME"; \
+   rm "$FILENAME"
+   ```
 
 ---
 
