@@ -11,6 +11,7 @@ build-job:
     - idf.py build
     - cp build/epaper-idf.bin .
   artifacts:
+    name: firmware.zip
     paths:
       - epaper-idf.bin
   only:
