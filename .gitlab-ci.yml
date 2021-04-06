@@ -4,7 +4,8 @@ build-job:
   stage: build
   image: espressif/idf:release-v4.2
   script: |
-    echo "Running epaper-idf build-job for GitLab account $GITLAB_USER_LOGIN..."
+    git pull
+    git submodule update --init --recursive
     idf.py build
     cp build/epaper-idf.bin .
   artifacts:
