@@ -40,24 +40,24 @@ This is how to install an already compiled version of the firmware if you don't 
 1. Flash the latest release version of the epaper-idf firmware:
 
    ```shell
-   FIRMWARE_VER="v0.1"; \
+   FIRM_VER="v0.1"; \
    SERIAL_PORT="/dev/ttyUSB0"; \
    BAUD_RATE="115200"; \
-   FILENAME="epaper-idf-$FIRMWARE_VER.bin"; \
-   PARTITION_FILENAME="epaper-idf-partition-table-$FIRMWARE_VER.bin"; \
-   OTA_DATA_FILENAME="epaper-idf-ota-data-initial-$FIRMWARE_VER.bin"; \
-   BOOTLOADER_FILENAME="epaper-idf-bootloader-$FIRMWARE_VER.bin"; \
+   FILENAME="epaper-idf-$FIRM_VER.bin"; \
+   PARTITION_FILENAME="epaper-idf-partition-table-$FIRM_VER.bin"; \
+   OTA_DATA_FILENAME="epaper-idf-ota-data-initial-$FIRM_VER.bin"; \
+   BOOTLOADER_FILENAME="epaper-idf-bootloader-$FIRM_VER.bin"; \
    curl -sL \
-   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/partition-table.bin?job=build-job \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRM_VER/raw/partition-table.bin?job=build-job \
    > "$PARTITION_FILENAME" && \
    curl -sL \
-   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/ota_data_initial.bin?job=build-job \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRM_VER/raw/ota_data_initial.bin?job=build-job \
    > "$OTA_DATA_FILENAME" && \
    curl -sL \
-   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/bootloader.bin?job=build-job \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRM_VER/raw/bootloader.bin?job=build-job \
    > "$BOOTLOADER_FILENAME" && \
    curl -sL \
-   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/epaper-idf.bin?job=build-job \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRM_VER/raw/epaper-idf.bin?job=build-job \
    > "$FILENAME" && \
    esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" \
    write_flash --flash_size 4MB \
@@ -74,24 +74,24 @@ This is how to install an already compiled version of the firmware if you don't 
 1. (Optional) Flash the latest development version of the epaper-idf firmware instead (the git master branch version):
 
    ```shell
-   FIRMWARE_VER="master"; \
+   FIRM_VER="master"; \
    SERIAL_PORT="/dev/ttyUSB0"; \
    BAUD_RATE="115200"; \
-   FILENAME="epaper-idf-$FIRMWARE_VER.bin"; \
-   PARTITION_FILENAME="epaper-idf-partition-table-$FIRMWARE_VER.bin"; \
-   OTA_DATA_FILENAME="epaper-idf-ota-data-initial-$FIRMWARE_VER.bin"; \
-   BOOTLOADER_FILENAME="epaper-idf-bootloader-$FIRMWARE_VER.bin"; \
+   FILENAME="epaper-idf-$FIRM_VER.bin"; \
+   PARTITION_FILENAME="epaper-idf-partition-table-$FIRM_VER.bin"; \
+   OTA_DATA_FILENAME="epaper-idf-ota-data-initial-$FIRM_VER.bin"; \
+   BOOTLOADER_FILENAME="epaper-idf-bootloader-$FIRM_VER.bin"; \
    curl -sL \
-   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/partition-table.bin?job=build-job \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRM_VER/raw/partition-table.bin?job=build-job \
    > "$PARTITION_FILENAME" && \
    curl -sL \
-   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/ota_data_initial.bin?job=build-job \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRM_VER/raw/ota_data_initial.bin?job=build-job \
    > "$OTA_DATA_FILENAME" && \
    curl -sL \
-   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/bootloader.bin?job=build-job \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRM_VER/raw/bootloader.bin?job=build-job \
    > "$BOOTLOADER_FILENAME" && \
    curl -sL \
-   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/epaper-idf.bin?job=build-job \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRM_VER/raw/epaper-idf.bin?job=build-job \
    > "$FILENAME" && \
    esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" \
    write_flash --flash_size 4MB \
