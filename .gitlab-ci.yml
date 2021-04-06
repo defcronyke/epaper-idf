@@ -9,10 +9,12 @@ build-job:
     - mkdir certs && touch certs/ca_cert.pem
     - cp sdkconfig.ci sdkconfig
     - idf.py build
+    - cp build/bootloader/bootloader.bin .
     - cp build/epaper-idf.bin .
   artifacts:
     name: "epaper-idf-bin-$CI_COMMIT_REF_NAME"
     paths:
+      - bootloader.bin
       - epaper-idf.bin
   only:
     - master

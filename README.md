@@ -29,7 +29,7 @@ _Check back later for updates..._
 
 ## Quickstart - Install the pre-built firmware
 
-This is how to install an already compiled version of the firmware if you don't intend to modify it. Otherwise, skip this step and follow the instructions in the other sections below:
+This is how to install an already compiled version of the firmware if you don't intend to modify it. Otherwise, skip this section and follow the instructions in the other sections below if you're going to be modifying the firmware:
 
 1. Install espressif's official esptool.py firmware flashing utility:
 
@@ -40,10 +40,16 @@ This is how to install an already compiled version of the firmware if you don't 
 1. Flash the latest release version of the epaper-idf firmware:
 
    ```shell
+   FIRMWARE_VERSION="v0.1"; \
    SERIAL_PORT="/dev/ttyUSB0"; \
-   FILENAME="epaper-idf-v0.1.bin"; \
-   curl -sL https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/v0.1/raw/epaper-idf.bin?job=build-job > "$FILENAME" && \
-   esptool.py -p "$SERIAL_PORT" -b 115200 write_flash 0x1000 "$FILENAME"; \
+   BAUD_RATE="115200"; \
+   FILENAME="epaper-idf-$FIRMWARE_VERSION.bin"; \
+   BOOTLOADER_FILENAME="epaper-idf-bootloader-$FIRMWARE_VERSION.bin"; \
+   curl -sL https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VERSION/raw/bootloader.bin?job=build-job > "$BOOTLOADER_FILENAME" && \
+   curl -sL https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VERSION/raw/epaper-idf.bin?job=build-job > "$FILENAME" && \
+   esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" write_flash 0x00000 "$FILENAME" && \
+   esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" write_flash 0x10000 "$FILENAME"; \
+   rm "$BOOTLOADER_FILENAME"; \
    rm "$FILENAME"
    ```
 
