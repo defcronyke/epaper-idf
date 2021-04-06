@@ -40,16 +40,16 @@ This is how to install an already compiled version of the firmware if you don't 
 1. Flash the latest release version of the epaper-idf firmware:
 
    ```shell
-   FIRMWARE_VERSION="v0.1"; \
+   FIRMWARE_VER="v0.1"; \
    SERIAL_PORT="/dev/ttyUSB0"; \
    BAUD_RATE="115200"; \
-   FILENAME="epaper-idf-$FIRMWARE_VERSION.bin"; \
-   BOOTLOADER_FILENAME="epaper-idf-bootloader-$FIRMWARE_VERSION.bin"; \
+   FILENAME="epaper-idf-$FIRMWARE_VER.bin"; \
+   BOOTLOADER_FILENAME="epaper-idf-bootloader-$FIRMWARE_VER.bin"; \
    curl -sL \
-   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VERSION/raw/bootloader.bin?job=build-job \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/bootloader.bin?job=build-job \
    > "$BOOTLOADER_FILENAME" && \
    curl -sL \
-   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VERSION/raw/epaper-idf.bin?job=build-job \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/epaper-idf.bin?job=build-job \
    > "$FILENAME" && \
    esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" write_flash 0x00000 "$BOOTLOADER_FILENAME" && \
    esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" write_flash 0x10000 "$FILENAME"; \
@@ -60,16 +60,16 @@ This is how to install an already compiled version of the firmware if you don't 
 1. (Optional) Flash the latest development version of the epaper-idf firmware instead (the git master branch version):
 
    ```shell
-   FIRMWARE_VERSION="master"; \
+   FIRMWARE_VER="master"; \
    SERIAL_PORT="/dev/ttyUSB0"; \
    BAUD_RATE="115200"; \
-   FILENAME="epaper-idf-$FIRMWARE_VERSION.bin"; \
-   BOOTLOADER_FILENAME="epaper-idf-bootloader-$FIRMWARE_VERSION.bin"; \
+   FILENAME="epaper-idf-$FIRMWARE_VER.bin"; \
+   BOOTLOADER_FILENAME="epaper-idf-bootloader-$FIRMWARE_VER.bin"; \
    curl -sL \
-   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VERSION/raw/bootloader.bin?job=build-job \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/bootloader.bin?job=build-job \
    > "$BOOTLOADER_FILENAME" && \
    curl -sL \
-   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VERSION/raw/epaper-idf.bin?job=build-job \
+   https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRMWARE_VER/raw/epaper-idf.bin?job=build-job \
    > "$FILENAME" && \
    esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" write_flash 0x00000 "$BOOTLOADER_FILENAME" && \
    esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" write_flash 0x10000 "$FILENAME"; \
