@@ -7,6 +7,7 @@ build-job:
     - git checkout $CI_COMMIT_REF_NAME
     - git submodule update --init --recursive
     - mkdir -p certs && touch certs/ca_cert.pem
+    - mv sdkconfig sdkconfig.orig && cp sdkconfig.ci sdkconfig
     - idf.py build
     - cp build/epaper-idf.bin .
   artifacts:
