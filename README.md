@@ -6,16 +6,17 @@ Copyright (c) 2021 [Jeremy Carter](https://eternalvoid.net) `<`[jeremy@jeremycar
 
 ## This is a work in progress
 
-_Check back later for updates..._
+_It's not working properly yet, so please don't try running it on your microcontrollers yet until further notice or else it might break them. Check back later for new developments and updates..._
 
 ## Details
 
-- An ESP IDF component for e-paper display firmware projects.
+- An ESP IDF component for Espressif ESP32 microcontroller-based e-paper display firmware projects.
 - Has streamlined support for WiFi HTTPS over-the-air (OTA) firmware updates.
 - Aims to solve some of the usability problems that some of the other ESP32 e-paper display libraries have.
 - I currently only have one model of e-paper screen to test with: WaveShare 7.5" 640x384 b/w Gdew075T8
-- Only ESP32 support is planned, and this code will only work for ESP IDF projects, not with Arduino projects.
-- I am making this as an attempt to replace some existing solutions which are floating around online currently (at least replace them for my own usage), since everything I could find had too many outstanding issues, and I didn't like the way their code was organized personally. I'll be happy if anyone else finds this useful, but I'm content to just use it myself if no-one notices it.
+- Only ESP32 ESP-IDF (Espressif's official FreeRTOS SDK) support is planned. This will not work for Arduino framework-based projects.
+
+I am making this as an attempt to eventually replace some existing solutions which are floating around online currently (at least replace them for my own usage), since everything I could find had too many outstanding issues, and I didn't like the way their code was organized personally. I'll be happy if anyone else finds this useful, otherwise I'll just use it myself if no-one notices it.
 
 ---
 
@@ -23,7 +24,8 @@ _Check back later for updates..._
 
 - Some of the code in this project is borrowed (and heavily modified/improved) from the OG e-paper library known as: [ZinggJM/GxEPD](https://github.com/ZinggJM/GxEPD)
 - Some of the code is loosely inspired by this other ESP IDF component project for e-paper displays: [martinberlin/cale-idf](https://github.com/martinberlin/cale-idf)
-- A big thanks to the authors of the above projects for releasing theirs with permissive licensing, so I could derive some ideas from their existing work. They both have too many bugs though, and I wanted to make my own thing instead of trying to convince those folks to let me patch up their projects (well the first guy flat-out refused my bugfixes actually). Maybe at some point this one will be a worthwhile alternative to the above, but until then, check out those projects because they are much more mature than mine, even though they are still very buggy.
+
+A big thanks to the authors of the above projects for releasing theirs with permissive licensing, so I could derive some ideas from their existing work. Both of those projects have too many bugs though, and I wanted to make my own thing instead of trying to convince them to let me patch up their projects (well the first guy flat-out refused my bugfixes actually). Maybe at some point this will be a worthwhile alternative to the above, but until then, check out those projects because they are much more mature than mine.
 
 ---
 
@@ -51,7 +53,9 @@ This is how to install an already compiled version of the firmware if you don't 
 
 ---
 
-## Prerequisites
+## Full Instructions
+
+### Prerequisites
 
 1. Install the current stable version of Espressif's ESP32 IDF:  
    [https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html)
@@ -64,40 +68,46 @@ This is how to install an already compiled version of the firmware if you don't 
    ./install.sh
    ```
 
-## To clone this project with git
+### To clone this project with git
 
 ```shell
 # Clone the current stable version (well it's not really stable yet though):
 git clone -b v0.1 --recursive https://gitlab.com/defcronyke/epaper-idf.git
 
-# Or clone the current development version instead:
+# (Optional) Or clone the current development version instead:
 git clone --recursive https://gitlab.com/defcronyke/epaper-idf.git
 ```
 
-## To update this project if you already have a copy cloned with git
+### To update this project if you already have a copy cloned with git
 
 ```shell
+# Git commands:
 git pull; \
 git submodule update --init --recursive
+
+# (Optional) Use the helper bash script instead:
+./update-git-repos.sh
 ```
 
-## To set up the project for OTA firmware updating ability, do this once
+### To set up the project for OTA firmware updating ability, do this once
 
 ```shell
-# generate the DH param
+# Generate the DH param (this takes a really long time,
+# sometimes dozens of minutes):
 ./gen-dhparam.sh
 
-# when asked, set the Common Name (CN) as: esprog
+# Generate the auth certificates. When asked, set the
+# Common Name (CN) as: esprog
 ./gen-cert.sh
 ```
 
-## To configure the firmware
+### To configure the firmware
 
 ```shell
-# source the esp-idf each time you open a new terminal instance
+# Source the esp-idf each time you open a new terminal instance:
 . idf.env
 
-# open the firmware configuration (Kconfig) menu
+# Open the firmware configuration (Kconfig) menu:
 idf.py menuconfig
 ```
 
@@ -105,25 +115,25 @@ idf.py menuconfig
 2. You might want to change the device's "Local netif hostname" (default is "epaper") in the "Component config -> LWIP" menu.
 3. At a minimum you'll have to select your e-paper device from the menu, otherwise compiling will give an error. You should definitely check the GPIO pin mappings while you're at it, since it's critical that you get those mappings correct if you don't want to break your e-paper display, and the defaults are likely not going to be correct for the way you wired up your devices.
 
-## To build the firmware
+### To build the firmware
 
 ```shell
 idf.py build
 ```
 
-## To install the firmware onto the esp32 device
+### To install the firmware onto the esp32 device
 
 ```shell
 idf.py flash
 ```
 
-## To view the esp32 device's serial console
+### To view the esp32 device's serial console
 
 ```shell
 idf.py monitor
 ```
 
-## OTA firmware updating instructions
+### OTA firmware updating instructions
 
 1. Configure your LAN's DNS to point the hostname "esprog" at the IP address of your firmware dev computer.
 2. Make sure you have these files on your dev computer (the same exact ones which were uploaded originally to the esp32 device by non-OTA method): ca_cert.pem, ca_key.pem, dhparam.pem

@@ -1,4 +1,14 @@
 #!/bin/bash
+#
+# epaper-idf
+#
+# Copyright (c) 2021 Jeremy Carter <jeremy@jeremycarter.ca>
+#
+# This code is released under the license terms contained in the
+# file named LICENSE, which is found in the top-level folder in
+# this project. You must agree to follow those license terms,
+# otherwise you aren't allowed to copy, distribute, or use any 
+# part of this project in any way.
 
 process_epaper_idf_gen_certs_args() {
     epaper_idf_script_args=()
@@ -46,7 +56,12 @@ generate new files, for example:"
 
     cd ${BUILD_DIR}
 
-    openssl req -x509 -newkey rsa:4096 -keyout ca_key.pem -out ca_cert.pem -days 365000 -nodes
+    # The certificate will only be valid for 1,000,000 years.
+    openssl req -new -newkey rsa:4096 -days 365000000 -nodes -x509 \
+      -subj "/C=CA/ST=Unlisted/L=Unlisted/O=Unlisted/CN=esprog" \
+      -keyout ca_key.pem -out ca_cert.pem
+
+    # openssl req -x509 -newkey rsa:4096 -keyout ca_key.pem -out ca_cert.pem -days 365000 -nodes
 
     chmod 600 ca_cert.pem
 
