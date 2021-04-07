@@ -96,9 +96,10 @@ git submodule update --init --recursive
 # sometimes dozens of minutes):
 ./gen-dhparam.sh
 
-# Generate the auth certificates. When asked, set the
-# Common Name (CN) as: esprog
-./gen-cert.sh
+# Generate the auth certificates. Change the "`esprog`" argument below to
+# your dev computer's DNS hostname, or leave it as-is and set your network's
+# DNS config to recognise your dev computer at the hostname "`esprog`":
+./gen-certs.sh esprog
 
 # Copy the new certificates onto your development machine, wherever you'll
 # be hosting the OTA firmware updating procedure from. The below command's
@@ -150,14 +151,16 @@ idf.py monitor
 
 ### OTA firmware updating instructions
 
-1. Configure your LAN's DNS to point the hostname "esprog" at the IP address of your firmware dev computer.
-1. Make sure you put the auth certificates in place on your dev computer first, using the "`./copy-certs.sh`" script as mentioned above. You should have copied them into a folder containing an up-to-date version of this project's git repository. Re-read the earlier instructions if you don't understand, or if the OTA updates aren't working properly for you.
+1. Configure your LAN's DNS to point the hostname "`esprog`" at the IP address of your firmware dev computer, or change the "`esprog`" argument to your hostname when running the "`./gen-certs.sh esprog`" script, as mentioned in an earlier section.
+1. Make sure you put the auth certificates in place on your dev computer first, using the "`./copy-certs.sh`" script as mentioned above. You should have copied them into a folder containing an up-to-date version of this project's git repository. Re-read the earlier instructions if the OTA updates aren't working properly for you.
 1. Update the "`Project version`" value in the "`Application manager`" section of the `Kconfig menu`. _This will trigger the ESP32 device to download your new firmware the next time you reboot it if the value is set to something different than what's currently running on the device._
-1. Run the following script on your dev computer to build the new version of your firmware and then begin hosting it for the device to do an OTA update:
+1. Run the following script on your dev computer to build the new version of your firmware, and then begin hosting it for the device to do an OTA update:
 
    ```shell
    ./serve.sh
    ```
 
-1. After the above script is finished building the firmware, it will start waiting for OTA firmware update requests from the device. Now reboot your ESP32 device to get it to connect and update itself with the new firmware version (or just wait for the deep sleep wakeup timer to fire if you're using deep sleep).
-1. Whenever you want to load new firmware, just change the "`Project version`" value in the "`Application manager`" section of the `Kconfig menu` (higher or lower version, it doesn't matter), then run the server script, and reboot the ESP32 device to load the new firmware onto it (or just wait for the deep sleep wakeup timer to fire if you're using deep sleep).
+1. After the above script is finished building the firmware, it will start waiting for OTA update requests from the device. Reboot your ESP32 device to get it to connect and update itself with the new firmware version (or just wait for the deep sleep wakeup timer to fire if you're using deep sleep).
+1. Whenever you want to load new firmware, change the "`Project version`" value in the "`Application manager`" section of the `Kconfig menu` (higher or lower version, it doesn't matter), then run the server script, and reboot the ESP32 device to load the new firmware onto it (or just wait for the deep sleep wakeup timer to fire if you're using deep sleep).
+
+- You can notice that your ESP32 device will be running the new firmware, usually once it hits your server for a copy of the firmware.bin file a second time in some short timespan (maybe 10 - 20 seconds). If you reboot the ESP32 and it only hits your OTA server once before any deep sleep wakup timer duration passes, it's still running the previous firmware, either because it didn't find a different firmware version than the one it's already running at the OTA server path, or for some other reason (see the serial console output for some hints on what happened).
