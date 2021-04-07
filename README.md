@@ -42,13 +42,13 @@ This is how to install an already compiled version of the firmware if you don't 
 1. Flash the latest release version of the epaper-idf firmware:
 
    ```shell
-   bash <(curl -sL https://tinyurl.com/epaper-idf-flash) v0.1
+   bash <(curl -sL https://tinyurl.com/epaper-idf-flash)
    ```
 
 1. (Optional) Flash the latest development version of the epaper-idf firmware instead (the git master branch version):
 
    ```shell
-   bash <(curl -sL https://tinyurl.com/epaper-idf-flash)
+   bash <(curl -sL https://tinyurl.com/epaper-idf-flash) master
    ```
 
 ---

@@ -11,7 +11,7 @@
 # part of this project in any way.
 
 epaper_idf_flash_firmware_online() {
-  FIRM_VER="master"
+  FIRM_VER="v0.1"
   SERIAL_PORT="/dev/ttyUSB0"
   BAUD_RATE="115200"
   FLASH_SIZE="4MB"
