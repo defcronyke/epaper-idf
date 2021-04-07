@@ -59,7 +59,7 @@ This is how to install an already compiled version of the firmware if you don't 
 
 1. Install the current stable version of Espressif's ESP32 IDF:  
    [https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html)
-2. If on ESP32 IDF v4.2, their release is bugged, so you have to do the following additional steps to fix it:
+1. If on ESP32 IDF v4.2, their release is bugged, so you have to do the following additional steps to fix it:
 
    ```shell
    cd ~/esp/esp-idf && \
@@ -99,6 +99,13 @@ git submodule update --init --recursive
 # Generate the auth certificates. When asked, set the
 # Common Name (CN) as: esprog
 ./gen-cert.sh
+
+# Copy the new certificates onto your development machine, wherever you'll
+# be hosting the OTA firmware updating procedure from. The below command's
+# argument is a valid scp destination path, and the destination should be
+# somewhere containing an up-to-date cloned copy of this project's git
+# repository:
+./copy-certs.sh $USER@dev-machine:~/epaper-idf
 ```
 
 ### To configure the firmware
@@ -111,9 +118,9 @@ git submodule update --init --recursive
 idf.py menuconfig
 ```
 
-1. Make sure you configure the items inside the menus named "Project ...".
-2. You might want to change the device's "Local netif hostname" (default is "epaper") in the "Component config -> LWIP" menu.
-3. At a minimum you'll have to select your e-paper device from the menu, otherwise compiling will give an error. You should definitely check the GPIO pin mappings while you're at it, since it's critical that you get those mappings correct if you don't want to break your e-paper display, and the defaults are likely not going to be correct for the way you wired up your devices.
+1. Make sure you configure the settings inside the menus named "`[<>] Project ...`".
+1. You might want to change the device's "Local netif hostname" (default is "epaper") in the "Component config -> LWIP" menu as well.
+1. At a minimum you'll have to select your e-paper device from the menu, otherwise compiling will give an error. You should definitely check the GPIO pin mappings while you're at it, since it's critical that you get those mappings correct if you don't want to break your e-paper display, and the defaults are likely not going to be correct for the way you wired up your devices.
 
 ### To build the firmware
 
@@ -121,13 +128,21 @@ idf.py menuconfig
 idf.py build
 ```
 
-### To install the firmware onto the esp32 device
+### To install the firmware onto the ESP32 device
 
 ```shell
+# Install the firmware you just built onto the device.
+# It will also be built first if necessary, if you didn't
+# run the build command from above yet:
 idf.py flash
+
+# TIP: You can build the firmware, flash it onto the device
+# and then start monitoring its serial console all at once
+# by using the following command instead:
+idf.py flash monitor
 ```
 
-### To view the esp32 device's serial console
+### To view the ESP32 device's serial console
 
 ```shell
 idf.py monitor
@@ -136,20 +151,13 @@ idf.py monitor
 ### OTA firmware updating instructions
 
 1. Configure your LAN's DNS to point the hostname "esprog" at the IP address of your firmware dev computer.
-2. Make sure you have these files on your dev computer (the same exact ones which were uploaded originally to the esp32 device by non-OTA method): ca_cert.pem, ca_key.pem, dhparam.pem
-3. Also copy this file into another spot, like so:
-
-   ```shell
-   mkdir -p server_certs && \
-   cp ca_cert.pem server_certs/
-   ```
-
-4. Update the "Project version" value in the "Application manager" section of the Kconfig menu. This will trigger the ESP32 device to download your new firmware the next time you reboot it if the value is set to something different than what's currently running on the device.
-5. Run the following script (make sure your "ca_cert.pem", "ca_key.pem", and "dhparam.pem" files are in the same folder as the script first):
+1. Make sure you put the auth certificates in place on your dev computer first, using the "`./copy-certs.sh`" script as mentioned above. You should have copied them into a folder containing an up-to-date version of this project's git repository. Re-read the earlier instructions if you don't understand, or if the OTA updates aren't working properly for you.
+1. Update the "`Project version`" value in the "`Application manager`" section of the `Kconfig menu`. _This will trigger the ESP32 device to download your new firmware the next time you reboot it if the value is set to something different than what's currently running on the device._
+1. Run the following script on your dev computer to build the new version of your firmware and then begin hosting it for the device to do an OTA update:
 
    ```shell
    ./serve.sh
    ```
 
-6. While the above script is running, reboot your esp32 device to load the new firmware (or just wait for the deep sleep wakeup timer to fire if you're using deep sleep).
-7. Whenever you want to load new firmware, just change the "Project version" value in the "Application manager" section of the Kconfig menu (higher or lower, it doesn't matter), then run the server script, and reboot the ESP32 device to load the new firmware onto it (or just wait for the deep sleep wakeup timer to fire if you're using deep sleep).
+1. After the above script is finished building the firmware, it will start waiting for OTA firmware update requests from the device. Now reboot your ESP32 device to get it to connect and update itself with the new firmware version (or just wait for the deep sleep wakeup timer to fire if you're using deep sleep).
+1. Whenever you want to load new firmware, just change the "`Project version`" value in the "`Application manager`" section of the `Kconfig menu` (higher or lower version, it doesn't matter), then run the server script, and reboot the ESP32 device to load the new firmware onto it (or just wait for the deep sleep wakeup timer to fire if you're using deep sleep).
