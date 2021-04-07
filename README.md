@@ -96,9 +96,9 @@ git submodule update --init --recursive
 # sometimes dozens of minutes):
 ./gen-dhparam.sh
 
-# Generate the auth certificates. Change the "`esprog`" argument below to
+# Generate the auth certificates. Change the "esprog" argument below to
 # your dev computer's DNS hostname, or leave it as-is and set your network's
-# DNS config to recognise your dev computer at the hostname "`esprog`":
+# DNS config to recognise your dev computer at the hostname "esprog":
 ./gen-certs.sh esprog
 
 # Copy the new certificates onto your development machine, wherever you'll
