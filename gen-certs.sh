@@ -56,12 +56,12 @@ generate new files, for example:"
 
     cd ${BUILD_DIR}
 
-    # The certificate will only be valid for 1,000,000 years.
-    openssl req -new -newkey rsa:4096 -days 365000000 -nodes -x509 \
-      -subj "/C=CA/ST=Unlisted/L=Unlisted/O=Unlisted/CN=esprog" \
-      -keyout ca_key.pem -out ca_cert.pem
+    rm ca_cert.pem ca_key.pem 2>/dev/null || true
 
-    # openssl req -x509 -newkey rsa:4096 -keyout ca_key.pem -out ca_cert.pem -days 365000 -nodes
+    # The certificate will only be valid for 1,000,000 years.
+    openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
+      -subj "/C=US/ST=Unlisted/L=Unlisted/O=Unlisted/OU=Unlisted/CN=esprog" \
+      -keyout ca_key.pem -out ca_cert.pem
 
     chmod 600 ca_cert.pem
 

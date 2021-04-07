@@ -47,6 +47,8 @@ generate a new file, for example:"
 
     cd ${BUILD_DIR}
 
+    rm dhparam.pem 2>/dev/null || true
+
     openssl dhparam -out dhparam.pem 4096
     chmod 600 dhparam.pem
 
