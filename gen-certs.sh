@@ -23,7 +23,29 @@ process_epaper_idf_gen_certs_args() {
 }
 
 epaper_idf_gen_certs() {
-    pwd="$PWD"
+    # Set this to the DNS name of your development machine.
+    # It should be the same as the domain portion of the URL 
+    # in the Kconfig menu section:
+    #   "Project OTA firmware config" -> "Firmware Upgrade URL"
+    #
+    # You can supply this as the first command-line argument,
+    # or by setting the COMMON_NAME environment variable if 
+    # you prefer.
+    #
+    # The ESP32 device will request OTA firmware updates at this
+    # hostname, and it will expect the certificate to have been
+    # generated first with that value in it, as well as your dev 
+    # machine to be accessible at that network hostname.
+    #
+    # You can leave the default value as-is, as long as you can
+    # modify your local network's DNS settings so that "esprog"
+    # is a recognized hostname which is pointing at your dev
+    # computer.
+
+    COMMON_NAME=${COMMON_NAME:-"esprog"}
+    if [ $# -ge 1 ]; then
+      COMMON_NAME="$1"
+    fi
 
     BUILD_DIR=${BUILD_DIR:-"build/"}
     CERTS_DIR=${CERTS_DIR:-"certs/"}
@@ -33,6 +55,8 @@ epaper_idf_gen_certs() {
 
     BUILD_VAR_OUT=""
     CERTS_VAR_OUT=""
+
+    pwd="$PWD"
 
     if [ ! -z ${BUILD_DIR+x} ]; then
         BUILD_VAR_OUT="${BUILD_DIR_VAR_NAME}=\"${BUILD_DIR}\""
@@ -47,7 +71,9 @@ epaper_idf_gen_certs() {
 Delete them first and then run this script again if you want to \
 generate new files, for example:"
         echo ""
-        echo "rm ca_cert.pem; rm ca_key.pem; ${BUILD_VAR_OUT} ${CERTS_VAR_OUT} ${BASH_SOURCE[0]}"
+        printf '%b\n' 'rm ca_cert.pem ca_key.pem; \
+'"${BUILD_VAR_OUT} ${CERTS_VAR_OUT}"' \
+'"${BASH_SOURCE[0]} ${COMMON_NAME}"
         echo ""
         return 1
     fi
@@ -60,7 +86,7 @@ generate new files, for example:"
 
     # The certificate will only be valid for 1,000,000 years.
     openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
-      -subj "/C=US/ST=Unlisted/L=Unlisted/O=Unlisted/OU=Unlisted/CN=esprog" \
+      -subj "/C=CA/ST=Unlisted/L=Unlisted/O=Unlisted/OU=Unlisted/CN=${COMMON_NAME}" \
       -keyout ca_key.pem -out ca_cert.pem
 
     chmod 600 ca_cert.pem
