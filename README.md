@@ -36,16 +36,20 @@ This is how to install an already compiled version of the firmware if you don't 
 1. Install espressif's official esptool.py firmware flashing utility:
 
    ```shell
+   # Install the python-based firmware flashing tool:
+   pip install esptool
+
+   # (Optional) If the above command doesn't work, try this one:
    python -m pip install esptool
    ```
 
-1. Flash the latest release version of the epaper-idf firmware:
+2. Flash the latest release version of the epaper-idf firmware:
 
    ```shell
    bash <(curl -sL https://tinyurl.com/epaper-idf-flash)
    ```
 
-1. (Optional) Flash the latest development version of the epaper-idf firmware instead (the git master branch version):
+3. (Optional) Flash the latest development version of the epaper-idf firmware instead (the git master branch version):
 
    ```shell
    bash <(curl -sL https://tinyurl.com/epaper-idf-flash) master
