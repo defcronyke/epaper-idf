@@ -130,16 +130,32 @@ idf.py menuconfig
 ### To build the firmware
 
 ```shell
-./build.sh
+# Specify the firmware short version. If the major or minor version
+# changes, it breaks backwards-compatibility by changing the name of
+# the EpaperIDF class:
+./build.sh v0.1
+
+# (Optional) Specify the firmware version. If the major or minor
+# version changes, it breaks backwards-compatibility by changing the
+# name of the EpaperIDF class:
+./build.sh v0.1.0
 ```
 
 ### To install the firmware onto the ESP32 device
 
 ```shell
-# Install the firmware you just built onto the device,
-# and begin monitoring with a serial console. The
-# firmware will be built first if necessary:
-./flash.sh
+# Install the firmware you just built onto the device, and begin
+# monitoring with a serial console. The firmware will be built first
+# if necessary.
+# Specify the firmware short version. If the major or minor version
+# changes, it breaks backwards-compatibility by changing the name of
+# the EpaperIDF class:
+./flash.sh v0.1
+
+# (Optional) Specify the firmware version. If the major or minor
+# version changes, it breaks backwards-compatibility by changing the
+# name of the EpaperIDF class:
+./flash.sh v0.1.0
 ```
 
 ### To view the ESP32 device's serial console
@@ -155,23 +171,18 @@ idf.py monitor
 1. Run the following script on your dev computer to build the new version of your firmware, and then begin hosting it for the device to do an OTA update:
 
    ```shell
-   # Build and serve the firmware for OTA update. To trigger the OTA
-   # update, the micro version will be incremented +1 by the value in
-   # the file: version-micro.txt
-   ./serve.sh
+   # Specify the firmware short version. If the major or minor version
+   # changes, it breaks backwards-compatibility by changing the name of
+   # the EpaperIDF class. To trigger the OTA update, the micro version
+   # will be auto-incremented by +1 to the value in the file
+   # version-micro.txt:
+   ./serve.sh v0.1
 
    # (Optional) Specify the firmware version. If the major or minor
    # version changes, it breaks backwards-compatibility by changing the
    # name of the EpaperIDF class. If the device is already running this
-   # version, it won't do an OTA update during startup.
+   # version, it won't do an OTA update during startup:
    ./serve.sh v0.1.0
-
-   # (Optional) Specify the short firmware version. If the major or minor
-   # version changes, it breaks backwards-compatibility by changing the
-   # name of the EpaperIDF class. To trigger the OTA update, the micro
-   # version will be incremented +1 by the value in the file:
-   # version-micro.txt
-   ./serve.sh v0.1
    ```
 
 1. After the above script is finished building the firmware, it will start waiting for OTA update requests from the device. Reboot your ESP32 device to get it to connect and update itself with the new firmware version (or just wait for the deep sleep wakeup timer to fire if you're using deep sleep).
