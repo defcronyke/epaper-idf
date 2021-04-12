@@ -8,8 +8,8 @@
 # otherwise you aren't allowed to copy, distribute, or use any 
 # part of this project in any way.
 
-CONFIG_APP_PROJECT_VER_FROM_CONFIG=y
-CONFIG_APP_PROJECT_VER="v0.1.0"
+CONFIG_APP_PROJECT_VER_FROM_CONFIG=n
+#CONFIG_APP_PROJECT_VER="0"
 # Default sdkconfig parameters to use the OTA
 # partition table layout, with a 4MB flash size
 CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y

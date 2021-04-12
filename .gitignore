@@ -21,3 +21,6 @@ sdkconfig
 sdkconfig.old
 
 firmware.bin
+
+version.txt
+version-micro.txt

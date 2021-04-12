@@ -157,12 +157,28 @@ idf.py monitor
 
 1. Configure your LAN's DNS to point the hostname "`esprog`" at the IP address of your firmware dev computer, or change the "`esprog`" argument to your hostname when running the "`./gen-certs.sh esprog`" script, as mentioned in an earlier section.
 1. Make sure you put the auth certificates in place on your dev computer first, using the "`./copy-certs.sh`" script as mentioned above. You should have copied them into a folder containing an up-to-date version of this project's git repository. Re-read the earlier instructions if the OTA updates aren't working properly for you.
-1. Update the "`Project version`" value in the "`Application manager`" section of the `Kconfig menu`. _This will trigger the ESP32 device to download your new firmware the next time you reboot it if the value is set to something different than what's currently running on the device._
 1. Run the following script on your dev computer to build the new version of your firmware, and then begin hosting it for the device to do an OTA update:
 
    ```shell
+   # Build and serve the firmware for OTA update. To trigger the OTA
+   # update, the micro version will be incremented +1 by the value in
+   # the file: version-micro.txt
    ./serve.sh
+
+   # (Optional) Specify the firmware version. If the major or minor
+   # version changes, it breaks backwards-compatibility by changing the
+   # name of the EpaperIDF class. If the device is already running this
+   # version, it won't do an OTA update during startup.
+   ./serve.sh v0.1.0
+
+   # (Optional) Specify the short firmware version. If the major or minor
+   # version changes, it breaks backwards-compatibility by changing the
+   # name of the EpaperIDF class. To trigger the OTA update, the micro
+   # version will be incremented +1 by the value in the file:
+   # version-micro.txt
+   ./serve.sh v0.1
    ```
 
 1. After the above script is finished building the firmware, it will start waiting for OTA update requests from the device. Reboot your ESP32 device to get it to connect and update itself with the new firmware version (or just wait for the deep sleep wakeup timer to fire if you're using deep sleep).
-1. Whenever you want to load new firmware, change the "`Project version`" value in the "`Application manager`" section of the `Kconfig menu` (higher or lower version, it doesn't matter), then run the server script, and reboot the ESP32 device to load the new firmware onto it (or just wait for the deep sleep wakeup timer to fire if you're using deep sleep).
+
+Whenever you want to load new firmware, run the server script and wait for the firmware to finish building, then reboot the ESP32 device to load the new firmware onto it (or just wait for the deep sleep wakeup timer to fire if you're using deep sleep).
