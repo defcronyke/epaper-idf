@@ -130,21 +130,16 @@ idf.py menuconfig
 ### To build the firmware
 
 ```shell
-idf.py build
+./build.sh
 ```
 
 ### To install the firmware onto the ESP32 device
 
 ```shell
-# Install the firmware you just built onto the device.
-# It will also be built first if necessary, if you didn't
-# run the build command from above yet:
-idf.py flash
-
-# TIP: You can build the firmware, flash it onto the device
-# and then start monitoring its serial console all at once
-# by using the following command instead:
-idf.py flash monitor
+# Install the firmware you just built onto the device,
+# and begin monitoring with a serial console. The
+# firmware will be built first if necessary:
+./flash.sh
 ```
 
 ### To view the ESP32 device's serial console
