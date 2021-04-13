@@ -268,7 +268,7 @@ _Some things listed in this section may not be fully implemented, tested, or wor
   (task/http-slideshow.h) Project main task override
   ```
 
-- Easy to add your own new programs (a.k.a. ["`main tasks`"](https://gitlab.com/defcronyke/epaper-idf-component/-/tree/master/task)) as options in [`the Kconfig menu`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/Kconfig.projbuild):
+- Easy to add your own new programs (a.k.a. "[`main tasks`](https://gitlab.com/defcronyke/epaper-idf-component/-/tree/master/task)") as options in [`the Kconfig menu`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/Kconfig.projbuild):
 
   ```text
   Select project main task (user) --->
@@ -292,7 +292,7 @@ _Some things listed in this section may not be fully implemented, tested, or wor
     (-15) Deep sleep seconds between screen refreshes [min - -15 || 15 - max]
     ```
 
-- The first example program ["`http-slideshow`"](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/task/http-slideshow.cpp) (work in progress) connects to [`an HTTPS web server`](https://defcronyke.gitlab.io/epaper-idf/http-slideshow/index.json) to fetch [`bitmap (.bmp) images`](https://defcronyke.gitlab.io/epaper-idf/http-slideshow/1.bmp), which will be displayed on the e-paper screen in sequence, as [`a slideshow`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/task/http-slideshow.cpp):
+- The first example program "[`http-slideshow`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/task/http-slideshow.cpp)" (work in progress) connects to [`an HTTPS web server`](https://defcronyke.gitlab.io/epaper-idf/http-slideshow/index.json) to fetch [`bitmap (.bmp) images`](https://defcronyke.gitlab.io/epaper-idf/http-slideshow/1.bmp), which will be displayed on the e-paper screen in sequence, as [`a slideshow`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/task/http-slideshow.cpp):
 
   ```text
   Select project main task (http-slideshow)  --->
@@ -304,6 +304,6 @@ _Some things listed in this section may not be fully implemented, tested, or wor
   **_ ----- End Task Settings ----- _**
   ```
 
-- Adding a new e-paper [`device`](https://gitlab.com/defcronyke/epaper-idf-component/-/tree/master/device) is made easier with the help of some [`C preprocessor macros`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/epaper-idf-device.h). You can look at [`components/epaper-idf-component/include/device/Gdew075T8.h`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/device/Gdew075T8.h) for [`an example of a real device`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/device/Gdew075T8.h), and notice that you can refer to every device as ["`class EpaperIDFDevice`"](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/device/Gdew075T8.h#L34), which will be properly expanded to its full name under-the-hood.
+- Adding a new e-paper [`device`](https://gitlab.com/defcronyke/epaper-idf-component/-/tree/master/device) is made easier with the help of some [`C preprocessor macros`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/epaper-idf-device.h). You can look at [`components/epaper-idf-component/include/device/Gdew075T8.h`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/device/Gdew075T8.h) for [`an example of a real device`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/device/Gdew075T8.h), and notice that you can refer to every device as "[`class EpaperIDFDevice`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/device/Gdew075T8.h#L34)", which will be properly expanded to its full name under-the-hood.
 
 - The idea is that you'll add more [`devices`](https://gitlab.com/defcronyke/epaper-idf-component/-/tree/master/include/device) and [`main tasks`](https://gitlab.com/defcronyke/epaper-idf-component/-/tree/master/include/task) as per the included examples, and then they'll be selected and configured through the esp-idf [`Kconfig menu`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/Kconfig.projbuild).
