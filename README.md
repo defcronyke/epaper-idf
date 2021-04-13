@@ -1,8 +1,8 @@
 # epaper-idf - epaper-idf-component
 
-[Copyright © 2021](https://defcronyke.gitlab.io/epaper-idf/jeremy-profile-paint-bw.png) [Jeremy Carter](https://eternalvoid.net) `<`[jeremy@jeremycarter.ca](mailto:Jeremy%20Carter%20<jeremy@jeremycarter.ca>?subject=epaper-idf)`>`
-
 ## An ESP-IDF component and project for e-paper displays
+
+[Copyright © 2021](https://defcronyke.gitlab.io/epaper-idf/jeremy-profile-paint-bw.png) [Jeremy Carter](https://eternalvoid.net) `<`[jeremy@jeremycarter.ca](mailto:Jeremy%20Carter%20<jeremy@jeremycarter.ca>?subject=epaper-idf)`>`
 
 [![world soup remastered](https://defcronyke.gitlab.io/epaper-idf/world-soup-remastered-bw.png)](https://defcronyke.gitlab.io/epaper-idf/world-soup-remastered-bw.png)
 
