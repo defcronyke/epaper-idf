@@ -10,6 +10,8 @@
 
 ## [ This is a work in progress! Check back later for progress... ]
 
+_You can test this project at your own risk if you want, but it's not ready for release yet, so please don't expect all the listed features to be available or working properly yet. Some things may not even be implemented at all yet. Check back later for new developments and updates..._
+
 ---
 
 ## Links
@@ -24,8 +26,6 @@
   - [https://github.com/defcronyke/Adafruit-GFX-Component](https://github.com/defcronyke/Adafruit-GFX-Component)
   - Forked and modified for ESP-IDF, from a 3rd-party Adafruit arduino library:  
     [https://github.com/adafruit/Adafruit-GFX-Library](https://github.com/adafruit/Adafruit-GFX-Library)
-
-_You can test this project at your own risk if you want, but it's not ready for release yet, so please don't expect all the listed features to be available or working properly yet. Some things may not even be implemented at all yet. Check back later for new developments and updates..._
 
 ## License
 
