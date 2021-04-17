@@ -363,12 +363,12 @@ _Some things listed in this section may not be fully implemented, tested, or wor
    ```text
    Select e-paper device (Gdew075T8) --->
    (device/Gdew075T8.h) e-paper device override
-   **_ ----- Display Settings ----- _**
+   *** ----- Display Settings ----- ***
    (0) Display rotation: 0 = 0°, 1 = 90° cw, 2 = 180° 3 = 270°
    (23) SPI GPIO for MOSI (MOSI or DIN)
    (18) SPI GPIO for Clock (CLK)
    ...
-   **_ ----- End Display Settings ----- _**
+   *** ----- End Display Settings ----- ***
    ```
 
 1. The minimal required set of [`header (.h) files`](https://gitlab.com/defcronyke/epaper-idf-component/-/tree/master/include) for the selected [`e-paper device`](https://gitlab.com/defcronyke/epaper-idf-component/-/tree/master/include/device) and [`main task`](https://gitlab.com/defcronyke/epaper-idf-component/-/tree/master/include/task) are included automatically based on [`your Kconfig selections`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/Kconfig.projbuild), and [`the header paths/filenames can be overridden`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/Kconfig.projbuild#L388) in the [`Kconfig menu`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/Kconfig.projbuild) if you want to do something custom or weird:
@@ -381,11 +381,11 @@ _Some things listed in this section may not be fully implemented, tested, or wor
 1. Easy to add your own new programs (a.k.a. "[`main tasks`](https://gitlab.com/defcronyke/epaper-idf-component/-/tree/master/task)") as options in [`the Kconfig menu`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/Kconfig.projbuild):
 
    ```text
-   Select project main task (user) --->
-   (task/none.h) Project main task override
-   **_ ----- Task Settings ----- _**
-   (15) Deep sleep seconds between screen refreshes [min - -15 || 15 - max]
-   **_ ----- End Task Settings ----- _**
+   Select project main task (user)  --->
+   (task/none.h) Project main task override (NEW)
+   ***  ----- Task Settings -----  ***
+   (-10) Deep sleep after refresh [delay_secs: ilong_min - -15 || deep_sleep_secs: 15 - ilong_max]
+   ***  ----- End Task Settings -----  ***
    ```
 
 1. You can [`choose to deep sleep`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/Kconfig.projbuild#L609) between screen refreshes to save power if you want, or you can keep everything running and use a regular task delay instead:
@@ -408,10 +408,10 @@ _Some things listed in this section may not be fully implemented, tested, or wor
    Select project main task (http-slideshow)  --->
    (task/http-slideshow.h) Project main task override
    ***  ----- Task Settings -----  ***
-   (15) Deep sleep seconds between screen refreshes [min - -15 || 15 - max]
+   (-10) Deep sleep after refresh [delay_secs: ilong_min - -15 || deep_sleep_secs: 15 - ilong_max]
    (https://defcronyke.gitlab.io/epaper-idf/http-slideshow/index.json) URL to a JSON object of paths to images (8-bit max .bmp)
    (defcronyke.gitlab.io) HTTP Host header value for above URL
-   **_ ----- End Task Settings ----- _**
+   ***  ----- End Task Settings -----  ***
    ```
 
 1. Adding a new e-paper [`device`](https://gitlab.com/defcronyke/epaper-idf-component/-/tree/master/device) is made easier with the help of some [`C preprocessor macros`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/epaper-idf-device.h). You can look at [`components/epaper-idf-component/include/device/Gdew075T8.h`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/device/Gdew075T8.h) for [`an example of a real device`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/device/Gdew075T8.h), and notice that you can refer to every device as "[`class EpaperIDFDevice`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/device/Gdew075T8.h#L34)", which will be properly expanded to its full name under-the-hood.
