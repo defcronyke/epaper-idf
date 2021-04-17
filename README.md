@@ -67,25 +67,43 @@ This is how to remotely build the firmware and install it.
 2. Clone the first repo you forked in the previous step onto your machine:
 
    ```shell
-   # Set you GitLab username here:
-   GITLAB_USER="#your-gitlab-username-here"
+   # Set you GitLab username and branch here:
+   GITLAB_USER="defcronyke-fork"
+   GITLAB_BRANCH="master"
 
    # Clone your GitLab repo fork:
-   git clone --recursive https://gitlab.com/$GITLAB_USER/epaper-idf; \
+   git clone --recursive https://gitlab.com/$GITLAB_USER/epaper-idf.git; \
    cd epaper-idf; \
-   git remote add upstream https://gitlab.com/defcronyke/epaper-idf
+   git checkout $GITLAB_BRANCH; \
+   git remote set-url origin git@gitlab.com:$GITLAB_USER/epaper-idf.git; \
+   git remote add upstream https://gitlab.com/defcronyke/epaper-idf.git; \
+   sed -i "s/defcronyke/$GITLAB_USER/g" .gitmodules; \
+   cd components/epaper-idf-component; \
+   git checkout $GITLAB_BRANCH; \
+   git remote set-url origin git@gitlab.com:$GITLAB_USER/epaper-idf-component.git; \
+   git remote add upstream https://gitlab.com/defcronyke/epaper-idf-component.git; \
+   cd ../..
    ```
 
 3. Modify something and push the changes to your forked repo, or force-push if you want to build without any modifications:
 
    ```shell
-   # Modify something and then run this to build:
-   git add . && \
-   git commit -m "Some changes." && \
-   git push -u origin master
+   # Set the git commit message and branch:
+   GITLAB_COMMIT_MSG="Some changes."
+   GITLAB_BRANCH="master"
 
-   # (Optional) Or you can build with no changes:
-   git push -fu origin master
+   # Commit the changes and build:
+   cd components/epaper-idf-component; \
+   git add . && \
+   git commit -m "$GITLAB_COMMIT_MSG" && \
+   git push -u origin $GITLAB_BRANCH; \
+   cd ../..; \
+   git add . && \
+   git commit -m "$GITLAB_COMMIT_MSG" && \
+   git push -u origin $GITLAB_BRANCH
+
+   # (Optional) Or you can build with no changes instead:
+   git push -fu origin $GITLAB_BRANCH
    ```
 
 4. Install espressif's official `esptool.py` firmware flashing utility:
@@ -101,12 +119,14 @@ This is how to remotely build the firmware and install it.
 5. Install the epaper-idf firmware onto the ESP32 device:
 
    ```shell
+   # Set your GitLab username, repo, and branch here:
+   GITLAB_USER="defcronyke-fork"
+   GITLAB_REPO="epaper-idf"
+   GITLAB_BRANCH="master"
+
    # Install your forked version of the firmware that you just
    # built. You may need to wait a few minutes for the build to
    # finish first.
-   GITLAB_USER="#your-gitlab-username-here"; \
-   GITLAB_REPO="epaper-idf"; \
-   GITLAB_BRANCH="master"; \
    bash <(curl -sL https://gitlab.com/$GITLAB_USER/$GITLAB_REPO/-/raw/$GITLAB_BRANCH/flash-firmware-online.sh) $GITLAB_BRANCH
 
    # (Optional) Or install the official release version:
