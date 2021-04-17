@@ -11,6 +11,7 @@
 # part of this project in any way.
 
 epaper_idf_flash_firmware_online() {
+  GITLAB_USER=${GITLAB_USER:-"defcronyke"}
   FIRM_VER="v0.1"
   SERIAL_PORT="/dev/ttyUSB0"
   BAUD_RATE="115200"
@@ -32,7 +33,7 @@ epaper_idf_flash_firmware_online() {
     FLASH_SIZE="$4"
   fi
 
-  URL_BASE="https://gitlab.com/defcronyke/epaper-idf/builds/artifacts/$FIRM_VER/raw/"; \
+  URL_BASE="https://gitlab.com/$GITLAB_USER/epaper-idf/builds/artifacts/$FIRM_VER/raw/"; \
   FILENAME="epaper-idf-$FIRM_VER.bin"; \
   PARTITION_FILENAME="epaper-idf-partition-table-$FIRM_VER.bin"; \
   OTA_DATA_FILENAME="epaper-idf-ota-data-initial-$FIRM_VER.bin"; \
