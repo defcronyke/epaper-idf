@@ -64,6 +64,8 @@ This is how to remotely build the firmware and install it.
 
    - [https://gitlab.com/defcronyke/epaper-idf-component](https://gitlab.com/defcronyke/epaper-idf-component/-/forks/new)
 
+   - [https://gitlab.com/defcronyke/Adafruit-GFX-Component](https://gitlab.com/defcronyke/Adafruit-GFX-component/-/forks/new)
+
 2. Clone the first repo you forked in the previous step onto your machine:
 
    ```shell
@@ -72,17 +74,14 @@ This is how to remotely build the firmware and install it.
    GITLAB_BRANCH="master"
 
    # Clone your GitLab repo fork:
-   git clone git@gitlab.com:$GITLAB_USER/epaper-idf.git; \
+   git clone -b $GITLAB_BRANCH --recursive git@gitlab.com:$GITLAB_USER/epaper-idf.git; \
    cd epaper-idf; \
    git remote add upstream https://gitlab.com/defcronyke/epaper-idf.git; \
-   git checkout $GITLAB_BRANCH; \
    sed -i "s#https://github.com/defcronyke#git@gitlab.com:$GITLAB_USER#g" .gitmodules; \
    sed -i "s@gitlab.com/defcronyke/epaper-idf/badges/master@gitlab.com/$GITLAB_USER/epaper-idf/badges/$GITLAB_BRANCH@g" README.md; \
    sed -i "s@gitlab.com/defcronyke/epaper-idf/-/pipelines@gitlab.com/$GITLAB_USER/epaper-idf/-/pipelines@g" README.md; \
-   git submodule update --init --recursive; \
    cd components/epaper-idf-component; \
    git remote add upstream https://gitlab.com/defcronyke/epaper-idf-component.git; \
-   git checkout $GITLAB_BRANCH; \
    sed -i "s@gitlab.com/defcronyke/epaper-idf/badges/master@gitlab.com/$GITLAB_USER/epaper-idf/badges/$GITLAB_BRANCH@g" README.md; \
    sed -i "s@gitlab.com/defcronyke/epaper-idf/-/pipelines@gitlab.com/$GITLAB_USER/epaper-idf/-/pipelines@g" README.md; \
    cd ../..
