@@ -77,11 +77,13 @@ This is how to remotely build the firmware and install it.
    git checkout $GITLAB_BRANCH; \
    git remote set-url origin git@gitlab.com:$GITLAB_USER/epaper-idf.git; \
    git remote add upstream https://gitlab.com/defcronyke/epaper-idf.git; \
-   sed -i "s/defcronyke/$GITLAB_USER/g" .gitmodules; \
+   sed -i "s@gitlab.com/defcronyke@gitlab.com/$GITLAB_USER@g" .gitmodules; \
+   sed -i "s@gitlab.com/defcronyke/epaper-idf/badges/master@gitlab.com/$GITLAB_USER/epaper-idf/badges/$GITLAB_BRANCH@g" README.md; \
    cd components/epaper-idf-component; \
    git checkout $GITLAB_BRANCH; \
    git remote set-url origin git@gitlab.com:$GITLAB_USER/epaper-idf-component.git; \
    git remote add upstream https://gitlab.com/defcronyke/epaper-idf-component.git; \
+   sed -i "s@gitlab.com/defcronyke/epaper-idf/badges/master@gitlab.com/$GITLAB_USER/epaper-idf/badges/$GITLAB_BRANCH@g" README.md; \
    cd ../..
    ```
 
