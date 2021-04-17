@@ -102,7 +102,8 @@ This is how to remotely build the firmware and install it.
    # finish first.
    GITLAB_USER="#your-gitlab-username-here"; \
    GITLAB_REPO="epaper-idf"; \
-   bash <(curl -sL https://gitlab.com/"$GITLAB_USER"/epaper-idf/-/raw/master/flash-firmware-online.sh) master
+   GITLAB_BRANCH="master"; \
+   bash <(curl -sL https://gitlab.com/$GITLAB_USER/$GITLAB_REPO/-/raw/$GITLAB_BRANCH/flash-firmware-online.sh) $GITLAB_BRANCH
 
    # (Optional) Or install the official release version:
    bash <(curl -sL https://tinyurl.com/epaper-idf-flash)
