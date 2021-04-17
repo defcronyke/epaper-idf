@@ -67,9 +67,13 @@ This is how to remotely build the firmware and install it.
 2. Clone the first repo you forked in the previous step onto your machine:
 
    ```shell
-   GITLAB_USER="#your-gitlab-username-here"; \
-   git clone --recursive https://gitlab.com/"$GITLAB_USER"/epaper-idf; \
-   cd epaper-idf
+   # Set you GitLab username here:
+   GITLAB_USER="#your-gitlab-username-here"
+
+   # Clone your GitLab repo fork:
+   git clone --recursive https://gitlab.com/$GITLAB_USER/epaper-idf; \
+   cd epaper-idf; \
+   git remote add upstream https://gitlab.com/defcronyke/epaper-idf
    ```
 
 3. Modify something and push the changes to your forked repo, or force-push if you want to build without any modifications:
