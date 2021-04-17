@@ -249,12 +249,11 @@ _Some things listed in this section may not be fully implemented, tested, or wor
    ```text
    [*] Enable WiFi Access Point (AP)
    ***  ----- WiFi Access Point Settings -----  ***
-   WiFi Access Point Startup (After Connection Retries)  --->
-   (1)     WiFi Max Connection Retries Before Starting AP
-   (wifi-net-15455) WiFi Access Point SSID
-   (T3oD cOneTioN! 143 2 psS@wRiDDd$i$^s) WiFi Access Point Password
-   (192.168.4.1) WiFi Access Point IP Address
-   (1)     WiFi Channel AP
+   WiFi AP Startup (After Connection Retries)  --->
+   (1)     WiFi AP Connection Retries Before Starting (wifi-net-15455) WiFi AP SSID
+   (T3oD cOneTioN! 143 2 psS@wRiDDd$i$^s) WiFi AP Password
+   (192.168.4.1) WiFi AP IP Address
+   (1)     WiFi AP Channel
    (1)     WiFi Maximum connections AP
    ***  ----- End WiFi Access Point Settings -----  ***
    ```
