@@ -177,13 +177,13 @@ idf.py menuconfig
 ```shell
 # Install the firmware you just built onto the device, and begin
 # monitoring with a serial console. The firmware will be built first
-# if necessary The version will be set as "v0.1.0" by default::
+# if necessary The version will be set as "v0.1.0" by default:
 ./flash.sh
 
 # (Optional) Specify the firmware short version when building and
 # installing. If the major or minor version changes, it breaks
 # backwards-compatibility on purpose by changing the name of the
-# EpaperIDF clas:
+# EpaperIDF class:
 ./flash.sh v0.2
 
 # (Optional) Specify the full firmware version number instead and it
@@ -194,8 +194,8 @@ idf.py menuconfig
 ### To view the ESP32 device's serial console
 
 ```shell
-# View the serial console output to see what the device is doing for
-# debugging purposes:
+# View the serial console output to see what the device is doing, for
+# monitoring and debugging:
 idf.py monitor
 ```
 
