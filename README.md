@@ -79,11 +79,10 @@ This is how to install an already compiled version of the firmware if you don't 
    ```
 
 3. Once the firmware is installed, the device will begin hosting a WiFi access point (AP) which you can connect to and access a configuration web page to set the WiFi `SSID` and `password` that the device will use to connect to your LAN WiFi. By default the access point will only allow one connection at a time for added safety, and it will shut down once the device is able to successfully connect to a WiFi network:
-
-   - Default WiFi Access Point Details:
-     - SSID: `wifi-net-15455`
-     - Password: `T3oD cOneTioN! 143 2 psS@wRiDDd$i$^s`
-     - Config URL (work in progress...): `https://192.168.4.1`
+   Default WiFi Access Point Details:
+   - SSID: `wifi-net-15455`
+   - Password: `T3oD cOneTioN! 143 2 psS@wRiDDd$i$^s`
+   - Config URL (work in progress...): `https://192.168.4.1`
 
 ---
 
