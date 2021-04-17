@@ -81,9 +81,15 @@ This is how to remotely build the firmware and install it.
    sed -i "s@gitlab.com/defcronyke/epaper-idf/badges/master@gitlab.com/$GITLAB_USER/epaper-idf/badges/$GITLAB_BRANCH@g" README.md; \
    sed -i "s@gitlab.com/defcronyke/epaper-idf/-/pipelines@gitlab.com/$GITLAB_USER/epaper-idf/-/pipelines@g" README.md; \
    cd components/epaper-idf-component; \
+   git remote set-url origin git@gitlab.com:$GITLAB_USER/epaper-idf-component.git; \
    git remote add upstream https://gitlab.com/defcronyke/epaper-idf-component.git; \
+   git checkout $GITLAB_BRANCH
    sed -i "s@gitlab.com/defcronyke/epaper-idf/badges/master@gitlab.com/$GITLAB_USER/epaper-idf/badges/$GITLAB_BRANCH@g" README.md; \
    sed -i "s@gitlab.com/defcronyke/epaper-idf/-/pipelines@gitlab.com/$GITLAB_USER/epaper-idf/-/pipelines@g" README.md; \
+   cd ../Adafruit-GFX-Component; \
+   git remote set-url origin git@gitlab.com:$GITLAB_USER/Adafruit-GFX-Component.git; \
+   git remote add upstream https://gitlab.com/defcronyke/Adafruit-GFX-Component.git; \
+   git checkout $GITLAB_BRANCH; \
    cd ../..
    ```
 
@@ -95,7 +101,11 @@ This is how to remotely build the firmware and install it.
    GITLAB_BRANCH="master"
 
    # Commit the changes and build:
-   cd components/epaper-idf-component; \
+   cd components/Adafruit-GFX-Component; \
+   git add . && \
+   git commit -m "$GITLAB_COMMIT_MSG" && \
+   git push -u origin $GITLAB_BRANCH; \
+   cd ../epaper-idf-component; \
    git add . && \
    git commit -m "$GITLAB_COMMIT_MSG" && \
    git push -u origin $GITLAB_BRANCH; \
