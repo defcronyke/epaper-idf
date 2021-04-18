@@ -15,7 +15,8 @@ build-job:
   image: espressif/idf:release-v4.2
   script:
     - git checkout $CI_COMMIT_REF_NAME
-    - sed -i "s#git@gitlab.com:#https://gitlab.com/#g" .gitmodules; \
+    - sed -i "s#git@gitlab.com:#https://gitlab.com/#g" .gitmodules
+    - sed -i "s#github.com/#gitlab.com/#g" .gitmodules
     - git submodule update --init --recursive
     - mkdir certs && touch certs/ca_cert.pem
     - cp sdkconfig.ci sdkconfig
