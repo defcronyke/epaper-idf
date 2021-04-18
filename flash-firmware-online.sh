@@ -13,13 +13,13 @@
 epaper_idf_flash_firmware_online() {
   GITLAB_USER=${GITLAB_USER:-"defcronyke"}
   GITLAB_REPO=${GITLAB_REPO:-"epaper-idf"}
-  FIRM_VER="v0.1"
-  SERIAL_PORT="/dev/ttyUSB0"
-  BAUD_RATE="115200"
-  FLASH_SIZE="4MB"
+  GIT_REPO_BRANCH=${GIT_REPO_BRANCH:-"v0.1"}
+  SERIAL_PORT=${SERIAL_PORT:-"/dev/ttyUSB0"}
+  BAUD_RATE=${BAUD_RATE:-"115200"}
+  FLASH_SIZE=${FLASH_SIZE:-"4MB"}
 
   if [ $# -ge 1 ]; then
-    FIRM_VER="$1"
+    GIT_REPO_BRANCH="$1"
   fi
 
   if [ $# -ge 2 ]; then
@@ -34,11 +34,11 @@ epaper_idf_flash_firmware_online() {
     FLASH_SIZE="$4"
   fi
 
-  URL_BASE="https://gitlab.com/$GITLAB_USER/$GITLAB_REPO/builds/artifacts/$FIRM_VER/raw/"; \
-  FILENAME="epaper-idf-$FIRM_VER.bin"; \
-  PARTITION_FILENAME="epaper-idf-partition-table-$FIRM_VER.bin"; \
-  OTA_DATA_FILENAME="epaper-idf-ota-data-initial-$FIRM_VER.bin"; \
-  BOOTLOADER_FILENAME="epaper-idf-bootloader-$FIRM_VER.bin"; \
+  URL_BASE="https://gitlab.com/$GITLAB_USER/$GITLAB_REPO/builds/artifacts/$GIT_REPO_BRANCH/raw/"; \
+  FILENAME="epaper-idf-$GIT_REPO_BRANCH.bin"; \
+  PARTITION_FILENAME="epaper-idf-partition-table-$GIT_REPO_BRANCH.bin"; \
+  OTA_DATA_FILENAME="epaper-idf-ota-data-initial-$GIT_REPO_BRANCH.bin"; \
+  BOOTLOADER_FILENAME="epaper-idf-bootloader-$GIT_REPO_BRANCH.bin"; \
   curl -sL ${URL_BASE}partition-table.bin?job=build-job \
   > "$PARTITION_FILENAME" && \
   curl -sL ${URL_BASE}ota_data_initial.bin?job=build-job \
