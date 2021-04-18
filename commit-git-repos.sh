@@ -22,9 +22,11 @@ epaper_idf_commit_git_repo_adafruit() {
   git commit -m "$msg" || \
     return $?
 
+  git push -u all $git_branch || \
   git push -u origin $git_branch
   git checkout $adafruit_ver_branch
   git merge $git_branch
+  git push -u all $adafruit_ver_branch || \
   git push -u origin $adafruit_ver_branch
   git checkout $git_branch
 
@@ -48,9 +50,11 @@ epaper_idf_commit_git_repo_epaper_idf_component() {
   git commit -m "$msg" || \
     return $?
 
+  git push -u all $git_branch || \
   git push -u origin $git_branch
   git checkout $ver_branch
   git merge $git_branch
+  git push -u all $ver_branch || \
   git push -u origin $ver_branch
   git checkout $git_branch
 
@@ -74,9 +78,11 @@ epaper_idf_commit_git_repo_epaper_idf() {
   git commit -m "$msg" || \
     return $?
 
+  git push -u all $git_branch || \
   git push -u origin $git_branch
   git checkout $ver_branch
   git merge $git_branch
+  git push -u all $ver_branch || \
   git push -u origin $ver_branch
   git checkout $git_branch
 
