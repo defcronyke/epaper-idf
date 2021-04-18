@@ -8,6 +8,14 @@
 
 ---
 
+## License
+
+[Copyright © 2021](https://defcronyke.gitlab.io/epaper-idf/jeremy-profile-paint-bw.png) [Jeremy Carter](https://eternalvoid.net) `<`[jeremy@jeremycarter.ca](mailto:Jeremy%20Carter%20<jeremy@jeremycarter.ca>?subject=epaper-idf)`>`
+
+This project is primarily released under the terms of the license contained in the file named [`LICENSE`](https://gitlab.com/defcronyke/epaper-idf/-/blob/master/LICENSE), which can be found [`in the top-level folder of this project`](https://gitlab.com/defcronyke/epaper-idf/-/blob/master/LICENSE). It also uses a bit of 3rd-party code, which is in turn primarily licensed under whichever licenses are referenced in each header (.h) or source (.c, .cpp, etc.) file, as per the original authors' preferences. A possibly non-exhaustive set of these [`other licenses`](https://gitlab.com/defcronyke/epaper-idf) is included in [`the top-level folder of this project`](https://gitlab.com/defcronyke/epaper-idf) in the files with names beginning with "`LICENSE-`".
+
+---
+
 ## [ This is a work in progress! Check back later for updates... ]
 
 _You can test this project at your own risk if you want, but it's not ready for release yet, so please don't expect all the listed features to be available or working properly yet. Some things may not even be implemented at all yet. Check back later for new developments and updates..._
@@ -60,12 +68,6 @@ Adafruit-GFX-Component (3rd-party)
 - Forked from this original 3rd-party Arduino-based library to add ESP-IDF support:  
   [https://github.com/adafruit/Adafruit-GFX-Library](https://github.com/adafruit/Adafruit-GFX-Library)
 
-## License
-
-[Copyright © 2021](https://defcronyke.gitlab.io/epaper-idf/jeremy-profile-paint-bw.png) [Jeremy Carter](https://eternalvoid.net) `<`[jeremy@jeremycarter.ca](mailto:Jeremy%20Carter%20<jeremy@jeremycarter.ca>?subject=epaper-idf)`>`
-
-This project is primarily released under the terms of the license contained in the file named [`LICENSE`](https://gitlab.com/defcronyke/epaper-idf/-/blob/master/LICENSE), which can be found [`in the top-level folder of this project`](https://gitlab.com/defcronyke/epaper-idf/-/blob/master/LICENSE). It also uses a bit of 3rd-party code, which is in turn primarily licensed under whichever licenses are referenced in each header (.h) or source (.c, .cpp, etc.) file, as per the original authors' preferences. A possibly non-exhaustive set of these [`other licenses`](https://gitlab.com/defcronyke/epaper-idf) is included in [`the top-level folder of this project`](https://gitlab.com/defcronyke/epaper-idf) in the files with names beginning with "`LICENSE-`".
-
 ## Details
 
 - An [`ESP32 ESP-IDF`](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/) [`component`](https://gitlab.com/defcronyke/epaper-idf-component) for [`Espressif ESP32`](https://wikipedia.org/wiki/ESP32) [`microcontroller-based e-paper display`](https://www.waveshare.com/wiki/7.5inch_e-Paper_HAT) [`firmware projects`](https://gitlab.com/defcronyke/epaper-idf).
@@ -75,15 +77,6 @@ This project is primarily released under the terms of the license contained in t
 - Only ESP32 ESP-IDF (Espressif's official FreeRTOS SDK) support is planned. This will not work for Arduino framework-based projects.
 
 I am making this as an attempt to eventually replace some existing solutions which are floating around online currently (at least replace them for my own usage), since everything I could find had too many outstanding issues, and I didn't like the way their code was organized personally.
-
----
-
-## Acknowledgements
-
-- Some of the code in this project is borrowed (and heavily modified/improved) from the OG e-paper library known as: [`ZinggJM/GxEPD`](https://github.com/ZinggJM/GxEPD)
-- Some of the code is loosely inspired by this other ESP IDF component project for e-paper displays: [`martinberlin/cale-idf`](https://github.com/martinberlin/cale-idf)
-
-A big thanks to the authors of the above projects for releasing their code with permissive licensing, so I could derive some ideas from their existing work. Both of those projects have too many bugs though, and I wanted to make my own thing instead of trying to convince them to let me patch up their projects. Maybe at some point this will be a worthwhile alternative to the above, but until then, check out those projects because they are much more mature than mine.
 
 ---
 
@@ -466,3 +459,12 @@ _Some things listed in this section may not be fully implemented, tested, or wor
 1. Adding a new e-paper [`device`](https://gitlab.com/defcronyke/epaper-idf-component/-/tree/master/device) is made easier with the help of some [`C preprocessor macros`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/epaper-idf-device.h). You can look at [`components/epaper-idf-component/include/device/Gdew075T8.h`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/device/Gdew075T8.h) for [`an example of a real device`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/device/Gdew075T8.h), and notice that you can refer to every device as "[`class EpaperIDFDevice`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/include/device/Gdew075T8.h#L34)", which will be properly expanded to its full name under-the-hood.
 
 1. The idea is that you'll add more [`devices`](https://gitlab.com/defcronyke/epaper-idf-component/-/tree/master/include/device) and [`main tasks`](https://gitlab.com/defcronyke/epaper-idf-component/-/tree/master/include/task) as per the included examples, and then they'll be selected and configured through the esp-idf [`Kconfig menu`](https://gitlab.com/defcronyke/epaper-idf-component/-/blob/master/Kconfig.projbuild).
+
+---
+
+## Acknowledgements
+
+- Some of the code in this project is borrowed (and heavily modified/improved) from the OG e-paper library known as: [`ZinggJM/GxEPD`](https://github.com/ZinggJM/GxEPD)
+- Some of the code is loosely inspired by this other ESP IDF component project for e-paper displays: [`martinberlin/cale-idf`](https://github.com/martinberlin/cale-idf)
+
+A big thanks to the authors of the above projects for releasing their code with permissive licensing, so I could derive some ideas from their existing work. Both of those projects have too many bugs though, and I wanted to make my own thing instead of trying to convince them to let me patch up their projects. Maybe at some point this will be a worthwhile alternative to the above, but until then, check out those projects because they are much more mature than mine.
