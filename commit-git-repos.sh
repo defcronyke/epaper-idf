@@ -116,6 +116,11 @@ epaper_idf_commit_git_repos() {
   # component repo so it's the same on both repos:
   cp README.md components/epaper-idf-component/
 
+  # Build latest version of config site:
+  cd components/epaper-idf-component/web
+  ./build.sh
+  cd ../../..
+
   epaper_idf_commit_git_repo_adafruit "$GIT_REPO_COMMIT_MSG" "$GIT_REPO_BRANCH" "$GIT_REPO_VERSION_BRANCH_ADAFRUIT" "$GIT_REPO_VERSION_TAG_ADAFRUIT"
   epaper_idf_commit_git_repos_handle_return $?
 
