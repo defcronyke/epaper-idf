@@ -62,6 +62,11 @@ epaper_idf_build() {
 
   echo "Building EpaperIDF firmware version: ${EPAPER_IDF_VERSION}"
 
+  # Build latest version of config site:
+  cd components/epaper-idf-component/web
+  ./build.sh
+  cd ../../..
+
   idf.py build
 
   echo

@@ -66,6 +66,11 @@ epaper_idf_serve() {
     PORT=${3:-"8089"}
     CERT_DIR=${CERT_DIR:-"build/"}
 
+    # Build latest version of config site:
+    cd components/epaper-idf-component/web
+    ./build.sh
+    cd ../../..
+
     epaper_idf_serve_set_version $@
 
     echo "Building EpaperIDF firmware version: ${EPAPER_IDF_VERSION}"
