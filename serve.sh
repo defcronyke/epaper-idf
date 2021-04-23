@@ -71,6 +71,10 @@ epaper_idf_serve() {
     ./build.sh
     cd ../../..
 
+    # Copy config site for GitHub:
+    rm -rf docs/
+    cp -r public/ docs/
+
     epaper_idf_serve_set_version $@
 
     echo "Building EpaperIDF firmware version: ${EPAPER_IDF_VERSION}"

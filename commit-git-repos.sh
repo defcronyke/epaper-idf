@@ -121,6 +121,10 @@ epaper_idf_commit_git_repos() {
   ./build.sh
   cd ../../..
 
+  # Copy config site for GitHub:
+  rm -rf docs/
+  cp -r public/ docs/
+
   epaper_idf_commit_git_repo_adafruit "$GIT_REPO_COMMIT_MSG" "$GIT_REPO_BRANCH" "$GIT_REPO_VERSION_BRANCH_ADAFRUIT" "$GIT_REPO_VERSION_TAG_ADAFRUIT"
   epaper_idf_commit_git_repos_handle_return $?
 
