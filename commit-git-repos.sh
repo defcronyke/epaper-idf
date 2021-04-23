@@ -117,9 +117,9 @@ epaper_idf_commit_git_repos() {
   cp README.md components/epaper-idf-component/
 
   # Build latest version of config site:
-  cd components/epaper-idf-component/web
+  cd components/epaper-idf-component
   ./build.sh
-  cd ../../..
+  cd ../..
 
   # Copy sites for GitHub:
   rm -rf docs/

@@ -78,9 +78,9 @@ epaper_idf_serve() {
     fi
 
     # Build latest version of config site:
-    cd components/epaper-idf-component/web
+    cd components/epaper-idf-component
     ./build.sh
-    cd ../../..
+    cd ../..
 
     # Copy sites for GitHub:
     rm -rf docs/
