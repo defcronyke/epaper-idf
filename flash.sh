@@ -73,6 +73,19 @@ epaper_idf_flash() {
 
   echo "Building and flashing EpaperIDF firmware version: ${EPAPER_IDF_VERSION}"
 
+  # Build latest version of config site:
+  cd components/epaper-idf-component
+  ./build-web.sh
+  cd ../..
+
+  # Copy sites for GitHub:
+  rm -rf docs/
+  cp -r public/ docs/
+  cd components/epaper-idf-component
+  rm -rf docs/
+  cp -r public/ docs/
+  cd ../..
+
   idf.py flash monitor
 }
 
