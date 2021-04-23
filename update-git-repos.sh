@@ -11,3 +11,8 @@
 # part of this project in any way.
 
 git pull; git submodule update --init --recursive
+
+# Update 3rd-party Javascript dependencies for the web app portion:
+cd components/epaper-idf-component/web && \
+npm i && \
+cd ../../..
