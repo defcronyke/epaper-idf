@@ -66,6 +66,17 @@ epaper_idf_serve() {
     PORT=${3:-"8089"}
     CERT_DIR=${CERT_DIR:-"build/"}
 
+    if [ -z ${IDF_PYTHON_ENV_PATH+x} ]; then
+      echo ""
+      echo "note: ESP-IDF has not been sourced yet. To speed things up, you can source it first by running the following command:"
+      echo ""
+      echo ". idf.env"
+      echo ""
+      echo "note: Sourcing ESP-IDF for you now..."
+      echo ""
+      . idf.env
+    fi
+
     # Build latest version of config site:
     cd components/epaper-idf-component/web
     ./build.sh

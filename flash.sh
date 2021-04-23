@@ -14,6 +14,17 @@ epaper_idf_flash() {
   VER_FILE=${VER_FILE:-"version.txt"}
   VER_MIC_FILE=${VER_MIC_FILE:-"version-micro.txt"}
 
+  if [ -z ${IDF_PYTHON_ENV_PATH+x} ]; then
+    echo ""
+    echo "note: ESP-IDF has not been sourced yet. To speed things up, you can source it first by running the following command:"
+    echo ""
+    echo ". idf.env"
+    echo ""
+    echo "note: Sourcing ESP-IDF for you now..."
+    echo ""
+    . idf.env
+  fi
+
   new_args=($(printf "$1\n" | sed -E 's/v//g' | sed -E 's/\./ /g'))
 
   set -- ${new_args[@]}
