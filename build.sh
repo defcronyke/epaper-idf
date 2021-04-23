@@ -67,9 +67,13 @@ epaper_idf_build() {
   ./build.sh
   cd ../../..
 
-  # Copy config site for GitHub:
+  # Copy sites for GitHub:
   rm -rf docs/
   cp -r public/ docs/
+  cd components/epaper-idf-component
+  rm -rf docs/
+  cp -r public/ docs/
+  cd ../..
 
   idf.py build
 

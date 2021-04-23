@@ -71,9 +71,13 @@ epaper_idf_serve() {
     ./build.sh
     cd ../../..
 
-    # Copy config site for GitHub:
+    # Copy sites for GitHub:
     rm -rf docs/
     cp -r public/ docs/
+    cd components/epaper-idf-component
+    rm -rf docs/
+    cp -r public/ docs/
+    cd ../..
 
     epaper_idf_serve_set_version $@
 
