@@ -25,6 +25,7 @@ build-job:
     - cp build/ota_data_initial.bin .
     - cp build/bootloader/bootloader.bin .
     - cp build/epaper-idf.bin .
+    - cp build/www.bin .
   artifacts:
     name: "epaper-idf-bin-$CI_COMMIT_REF_NAME"
     paths:
@@ -32,6 +33,7 @@ build-job:
       - ota_data_initial.bin
       - bootloader.bin
       - epaper-idf.bin
+      - www.bin
   only:
     - master
     - v0.1
