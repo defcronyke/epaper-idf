@@ -37,6 +37,8 @@ epaper_idf_copy_certs() {
     scp *.pem "$@"
     scp *.pem "$@"/$BUILD_DIR
     scp ca_cert.pem "$@"/$CERT_DIR
+    scp ca_cert_conf.pem "$@"/$CERT_DIR
+    scp ca_key_conf.pem "$@"/$CERT_DIR
 }
 
 epaper_idf_copy_certs $@
