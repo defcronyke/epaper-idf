@@ -96,6 +96,14 @@ generate new files, for example:"
     mkdir -p ../${CERTS_DIR}
     cp ca_cert.pem ../${CERTS_DIR}
 
+    # Gen cert for config site.
+    openssl req -newkey rsa:2048 -nodes -keyout ca_key_conf.pem -x509 -days 3650 -out ca_cert_conf.pem -subj "/CN=ESP32 HTTPS server epaper-idf"
+
+    chmod 600 ca_cert_conf.pem
+
+    cp ca_cert_conf.pem ca_key_conf.pem ../
+    cp ca_cert_conf.pem ca_key_conf.pem ../${CERTS_DIR}
+
     cd "$pwd"
 }
 

@@ -17,6 +17,9 @@ ca_cert.pem
 ca_key.pem
 dhparam.pem
 
+ca_cert_conf.pem
+ca_key_conf.pem
+
 sdkconfig
 sdkconfig.old
 
