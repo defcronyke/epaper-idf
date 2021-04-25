@@ -26,7 +26,8 @@ epaper_idf_gen_certs() {
     # Set this to the DNS name of your development machine.
     # It should be the same as the domain portion of the URL 
     # in the Kconfig menu section:
-    #   "Project OTA firmware config" -> "Firmware Upgrade URL"
+    #
+    #   "[<>] Project OTA firmware config" -> "Firmware Upgrade URL"
     #
     # You can supply this as the first command-line argument,
     # or by setting the COMMON_NAME environment variable if 
@@ -84,11 +85,25 @@ generate new files, for example:"
 
     rm ca_cert.pem ca_key.pem 2>/dev/null || true
 
-    # The certificate will only be valid for 1,000,000 years.
-    openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
-      -subj "/C=CA/ST=Unlisted/L=Unlisted/O=Unlisted/OU=Unlisted/CN=${COMMON_NAME}" \
-      -keyout ca_key.pem -out ca_cert.pem
+    # openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
+    # openssl req -new -newkey rsa:4096 -days 365000000 -nodes -x509 \
 
+    # TODO: Support other encryption algorithms (maybe requires two separate commands instead of just one):
+    # openssl genrsa -aes128 -out server-key.pem
+
+    # The certificate will only be valid for 1,000 years :( due to some restriction from openssl.
+    openssl req -x509 -newkey rsa:4096 -sha256 -days 365000 -nodes \
+      -keyout ca_key.pem -out ca_cert.pem -subj "/C=CA/ST=Unlisted/L=Unlisted/O=Unlisted/OU=Unlisted/CN=${COMMON_NAME}" \
+      -addext "subjectAltName=DNS:${COMMON_NAME}"
+
+    # openssl req -x509 -newkey rsa:4096 -sha256 -days 365000 -nodes -keyout ca_key.pem -out ca_cert.pem -subj "/C=CA/ST=Unlisted/L=Unlisted/O=Unlisted/OU=Unlisted/CN=${COMMON_NAME}" -extensions san \
+    # -config <( \
+    #   echo '[req]'; \
+    #   echo 'distinguished_name=req'; \
+    #   echo '[san]'; \
+    #   echo "subjectAltName=DNS:${COMMON_NAME}")
+      # echo "subjectAltName=DNS:localhost,${COMMON_NAME}")
+       
     chmod 600 ca_cert.pem
 
     cp ca_cert.pem ca_key.pem ../
@@ -96,13 +111,13 @@ generate new files, for example:"
     mkdir -p ../${CERTS_DIR}
     cp ca_cert.pem ../${CERTS_DIR}
 
-    # Gen cert for config site.
-    openssl req -newkey rsa:2048 -nodes -keyout ca_key_conf.pem -x509 -days 3650 -out ca_cert_conf.pem -subj "/CN=ESP32 HTTPS server epaper-idf"
+    # # Gen cert for config site.
+    # openssl req -newkey rsa:2048 -nodes -keyout ca_key_conf.pem -x509 -days 3650 -out ca_cert_conf.pem -subj "/CN=ESP32 HTTPS server epaper-idf"
 
-    chmod 600 ca_cert_conf.pem
+    # chmod 600 ca_cert_conf.pem
 
-    cp ca_cert_conf.pem ca_key_conf.pem ../
-    cp ca_cert_conf.pem ca_key_conf.pem ../${CERTS_DIR}
+    # cp ca_cert_conf.pem ca_key_conf.pem ../
+    # cp ca_cert_conf.pem ca_key_conf.pem ../${CERTS_DIR}
 
     cd "$pwd"
 }

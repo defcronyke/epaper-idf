@@ -10,16 +10,16 @@
 # otherwise you aren't allowed to copy, distribute, or use any 
 # part of this project in any way.
 
-epaper_idf_copy_certs() {
-    BUILD_DIR=${BUILD_DIR:-"build/"}
-    CERT_DIR=${CERT_DIR:-"certs/"}
+epaper_idf_copy_conf_certs() {
+    BUILD_DIR_CONF=${BUILD_DIR_CONF:-"build/"}
+    CERT_DIR_CONF=${CERT_DIR_CONF:-"certs/"}
 
-    if [ ! -f "ca_cert.pem" ] || [ ! -f "ca_key.pem" ]; then
-        echo "error: You haven't created these certificate files yet: ./ca_cert.pem, ca_key.pem"
+    if [ ! -f "ca_cert_conf.pem" ] || [ ! -f "ca_key_conf.pem" ]; then
+        echo "error: You haven't created these certificate files yet: ./ca_cert_conf.pem, ca_key_conf.pem"
         echo ""
         echo "Run the following script first to generate the certificates:"
         echo ""
-        echo "./gen-certs.sh"
+        echo "./gen-conf-certs.sh"
         echo ""
         return 1
     fi
@@ -34,15 +34,14 @@ epaper_idf_copy_certs() {
         return 2
     fi
 
-    scp ca_cert.pem "$@"
-    scp ca_key.pem "$@"
+    scp ca_cert_conf.pem "$@"
+    scp ca_key_conf.pem "$@"
     scp dhparam.pem "$@"
-    scp ca_cert.pem "$@"/$BUILD_DIR
-    scp ca_key.pem "$@"/$BUILD_DIR
-    scp dhparam.pem "$@"/$BUILD_DIR
-    scp ca_cert.pem "$@"/$CERT_DIR
-    # scp ca_cert_conf.pem "$@"/$CERT_DIR
-    # scp ca_key_conf.pem "$@"/$CERT_DIR
+    scp ca_cert_conf.pem "$@"/$BUILD_DIR_CONF
+    scp ca_key_conf.pem "$@"/$BUILD_DIR_CONF
+    scp dhparam.pem "$@"/$BUILD_DIR_CONF
+    scp ca_cert_conf.pem "$@"/$CERT_DIR_CONF
+    scp ca_key_conf.pem "$@"/$CERT_DIR_CONF
 }
 
-epaper_idf_copy_certs $@
+epaper_idf_copy_conf_certs $@
