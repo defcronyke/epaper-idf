@@ -56,7 +56,7 @@ epaper_idf_flash_firmware_online() {
   0x8000 "$PARTITION_FILENAME" \
   0xd000 "$OTA_DATA_FILENAME" \
   0x10000 "$FILENAME"; \
-  0x30a000 "$WWW_FILENAME"; \
+  0x30c000 "$WWW_FILENAME"; \
   rm "$PARTITION_FILENAME"; \
   rm "$OTA_DATA_FILENAME"; \
   rm "$BOOTLOADER_FILENAME"; \
