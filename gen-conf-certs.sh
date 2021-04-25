@@ -41,6 +41,11 @@ epaper_idf_gen_conf_certs() {
       COMMON_NAME_CONF="$1"
     fi
 
+    COMMON_IP_CONF=${COMMON_IP_CONF:-"192.168.4.1"}
+    if [ $# -ge 2 ]; then
+      COMMON_IP_CONF="$2"
+    fi
+
     BUILD_DIR_CONF=${BUILD_DIR_CONF:-"build/"}
     CERTS_DIR_CONF=${CERTS_DIR_CONF:-"certs/"}
 
@@ -67,7 +72,7 @@ generate new files, for example:"
         echo ""
         printf '%b\n' 'rm ca_cert_conf.pem ca_key_conf.pem; \
 '"${BUILD_VAR_OUT_CONF} ${CERTS_VAR_OUT_CONF}"' \
-'"${BASH_SOURCE[0]} ${COMMON_NAME_CONF}"
+'"${BASH_SOURCE[0]} ${COMMON_NAME_CONF} ${COMMON_IP_CONF}"
         echo ""
         return 1
     fi
@@ -98,7 +103,7 @@ generate new files, for example:"
     # Gen cert for config site. The certificate will only be valid for 1,000 years :( due to some restriction from openssl.
     openssl req -x509 -newkey rsa:4096 -sha256 -days 365000 -nodes \
       -keyout ca_key_conf.pem -out ca_cert_conf.pem -subj "/C=CA/ST=Unlisted/L=Unlisted/O=Unlisted/OU=Unlisted/CN=${COMMON_NAME_CONF}" \
-      -addext "subjectAltName=DNS:${COMMON_NAME_CONF}"
+      -addext "subjectAltName=DNS:${COMMON_NAME_CONF},IP:${COMMON_IP_CONF}"
     
     # openssl req -newkey rsa:4096 -nodes -keyout ca_key_conf.pem -x509 -days 365000000 -out ca_cert_conf.pem -subj "/CN=${COMMON_NAME_CONF}"
     # openssl req -newkey rsa:2048 -nodes -keyout ca_key_conf.pem -x509 -days 365000000 -out ca_cert_conf.pem -subj "/CN=${COMMON_NAME_CONF}"
