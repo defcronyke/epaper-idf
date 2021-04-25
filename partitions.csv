@@ -6,4 +6,4 @@ phy_init, data, phy,      0xf000,   0x1000
 factory,  app,  factory,  0x10000,  0xfba20
 ota_0,    app,  ota_0,    ,         0xfba20
 ota_1,    app,  ota_1,    ,         0xfba20
-www,      data, spiffs,   ,         0xc6000
+www,      data, spiffs,   ,         0xc3000
