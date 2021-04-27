@@ -38,25 +38,29 @@ epaper_idf_flash_firmware_online() {
   FILENAME="epaper-idf-$GIT_REPO_BRANCH.bin"; \
   PARTITION_FILENAME="epaper-idf-partition-table-$GIT_REPO_BRANCH.bin"; \
   OTA_DATA_FILENAME="epaper-idf-ota-data-initial-$GIT_REPO_BRANCH.bin"; \
+  PHY_INIT_DATA_FILENAME="epaper-idf-phy-init-data-$GIT_REPO_BRANCH.bin"; \
   BOOTLOADER_FILENAME="epaper-idf-bootloader-$GIT_REPO_BRANCH.bin"; \
   WWW_FILENAME="epaper-idf-www-$GIT_REPO_BRANCH.bin"; \
   curl -sL ${URL_BASE}partition-table.bin?job=build-job \
-  > "$PARTITION_FILENAME" && \
+    > "$PARTITION_FILENAME" && \
   curl -sL ${URL_BASE}ota_data_initial.bin?job=build-job \
-  > "$OTA_DATA_FILENAME" && \
+    > "$OTA_DATA_FILENAME" && \
+  curl -sL ${URL_BASE}phy_init_data.bin?job=build-job \
+    > "$PHY_INIT_DATA_FILENAME" && \
   curl -sL ${URL_BASE}bootloader.bin?job=build-job \
-  > "$BOOTLOADER_FILENAME" && \
+    > "$BOOTLOADER_FILENAME" && \
   curl -sL ${URL_BASE}www.bin?job=build-job \
-  > "$WWW_FILENAME" && \
+    > "$WWW_FILENAME" && \
   curl -sL ${URL_BASE}epaper-idf.bin?job=build-job \
-  > "$FILENAME" && \
+    > "$FILENAME" && \
   esptool.py -p "$SERIAL_PORT" -b "$BAUD_RATE" \
   write_flash --flash_size "$FLASH_SIZE" \
   0x1000 "$BOOTLOADER_FILENAME" \
   0x8000 "$PARTITION_FILENAME" \
   0xd000 "$OTA_DATA_FILENAME" \
+  0xf000 "$PHY_INIT_DATA_FILENAME" \
   0x10000 "$FILENAME" \
-  0x30c000 "$WWW_FILENAME"; \
+  0x33d000 "$WWW_FILENAME"; \
   rm "$PARTITION_FILENAME"; \
   rm "$OTA_DATA_FILENAME"; \
   rm "$BOOTLOADER_FILENAME"; \
