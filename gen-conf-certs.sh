@@ -101,7 +101,8 @@ generate new files, for example:"
     # openssl genrsa -aes128 -out server-key.pem
 
     # Gen cert for config site. The certificate will only be valid for 1,000 years :( due to some restriction from openssl.
-    openssl req -x509 -newkey rsa:4096 -sha256 -days 365000 -nodes \
+    # openssl req -x509 -newkey rsa:4096 -sha256 -days 365000 -nodes \
+    openssl req -x509 -newkey rsa:2048 -sha256 -days 365000 -nodes \
       -keyout ca_key_conf.pem -out ca_cert_conf.pem -subj "/C=CA/ST=Unlisted/L=Unlisted/O=Unlisted/OU=Unlisted/CN=${COMMON_NAME_CONF}" \
       -addext "subjectAltName=DNS:${COMMON_NAME_CONF},IP:${COMMON_IP_CONF}"
     
