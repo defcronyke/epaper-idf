@@ -41,7 +41,7 @@ epaper_idf_gen_conf_certs() {
       COMMON_NAME_CONF="$1"
     fi
 
-    COMMON_IP_CONF=${COMMON_IP_CONF:-"192.168.4.1"}
+    COMMON_IP_CONF=${COMMON_IP_CONF:-"126.233.53.78"}
     if [ $# -ge 2 ]; then
       COMMON_IP_CONF="$2"
     fi
@@ -72,7 +72,7 @@ generate new files, for example:"
         echo ""
         printf '%b\n' 'rm ca_cert_conf.pem ca_key_conf.pem; \
 '"${BUILD_VAR_OUT_CONF} ${CERTS_VAR_OUT_CONF}"' \
-'"${BASH_SOURCE[0]} ${COMMON_NAME_CONF} ${COMMON_IP_CONF}"
+'"${BASH_SOURCE[0]} ${COMMON_NAME_CONF}"
         echo ""
         return 1
     fi
