@@ -25,6 +25,8 @@ epaper_idf_size() {
     . idf.env
   fi
 
+  idf.py partition_table
+
   idf.py size
 }
 
